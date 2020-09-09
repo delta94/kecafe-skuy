@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     width: width * 0.42,
     height: '100%',
     maxHeight: height * 0.29,
-    margin: 5,
+    margin: 8,
     elevation: 5,
     backgroundColor: 'white',
   },

@@ -5,38 +5,45 @@ import BottomNavigation, {
 import React from 'react';
 import {Text, View, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import menu_icon from '../../assets/img/menu.png';
+import order_icon from '../../assets/img/order.png';
+import user_icon from '../../assets/img/user.png';
 
 export default class Navbar extends React.Component {
   tabs = [
     {
-      key: 'games',
-      icon: 'gamepad-variant',
-      label: 'Games',
-      barColor: '#388E3C',
+      key: 'all-menu',
+      icon: menu_icon,
+      label: 'Menu',
+      barColor: '#AB84C8',
       pressColor: 'rgba(255, 255, 255, 0.16)',
     },
     {
-      key: 'movies-tv',
-      icon: 'movie',
-      label: 'Movies & TV',
-      barColor: '#B71C1C',
+      key: 'last-order',
+      icon: order_icon,
+      label: 'Last Order',
+      barColor: '#AB84C8',
       pressColor: 'rgba(255, 255, 255, 0.16)',
     },
     {
-      key: 'music',
-      icon: 'music-note',
-      label: 'Music',
-      barColor: '#E64A19',
+      key: 'profile',
+      icon: user_icon,
+      label: 'Profile',
+      barColor: '#AB84C8',
       pressColor: 'rgba(255, 255, 255, 0.16)',
     },
   ];
 
   state = {
-    activeTab: 'games',
+    activeTab: 'all-menu',
   };
 
   renderIcon = (icon) => ({isActive}) => (
-    <Icon size={24} color="white" name={icon} />
+    <Image
+      style={{height: 24, width: 24, tintColor: 'white'}}
+      color="white"
+      source={icon}
+    />
   );
 
   renderTab = ({tab, isActive}) => (
