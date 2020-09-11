@@ -1,15 +1,15 @@
 import {StyleSheet, Dimensions} from 'react-native';
 
-const width = Dimensions.get('window').width;
+const {width} = Dimensions.get('window');
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     height: 100,
     backgroundColor: 'white',
     elevation: 5,
   },
   header: {
-    width: width,
+    width,
     display: 'flex',
     height: 50,
     flexDirection: 'row',
@@ -37,3 +37,5 @@ export const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
 });
+
+export default styles;

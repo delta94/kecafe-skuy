@@ -9,17 +9,19 @@
 import React, {useState} from 'react';
 import {SafeAreaView, StatusBar} from 'react-native';
 import NavBar from './src/component/Navbar/Navbar.Customer';
-import {Header} from './src/component/Header/Header';
+import Header from './src/component/Header/Header';
 import UserViewCustomer from './src/component/UserView/UserView.Customer';
+import MenuList from './src/component/Menu/MenuList';
 
 const App = () => {
   return (
     <>
       <StatusBar />
       <SafeAreaView>
-        <Header />
-        <UserViewCustomer />
-        <NavBar />
+        {/* <Header /> */}
+        {/* <UserViewCustomer /> */}
+        <MenuList />
+        {/* <NavBar /> */}
       </SafeAreaView>
     </>
   );

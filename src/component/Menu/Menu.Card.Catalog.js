@@ -1,21 +1,30 @@
+import React from 'react';
 import {Text, View, Image} from 'react-native';
 import takoyaki from '../../assets/img/Takoyaki.jpg';
-import React from 'react';
-import {styles} from './menuStyle';
+import styles from './menuStyle';
+import SkeletonContent from 'react-native-skeleton-content-nonexpo';
 
 const CardCatalog = (props) => {
   return (
     <View style={styles.cardContainer}>
-      <View style={styles.cardImageContainer}>
+      <SkeletonContent
+        containerStyle={styles.cardImageContainer}
+        layout={styles.cardImage}
+        isLoading={false}>
         <Image style={styles.cardImage} source={takoyaki} />
-      </View>
+      </SkeletonContent>
       <View style={styles.cardTextContainer}>
-        <Text numberOfLines={2} style={styles.cardTextTitle}>
-          Takoyaki
-        </Text>
-        <Text numberOfLines={1} style={styles.cardTextPrice}>
-          Rp. 25.000
-        </Text>
+        <SkeletonContent
+          containerStyle={styles.cardTextContainer}
+          layout={[styles.cardTextPrice, styles.cardTextPrice, styles.cardTextPrice]}
+          isLoading={false}>
+          <Text numberOfLines={2} style={styles.cardTextTitle}>
+            Takoyaki
+          </Text>
+          <Text numberOfLines={1} style={styles.cardTextPrice}>
+            Rp. 25.000
+          </Text>
+        </SkeletonContent>
       </View>
     </View>
   );

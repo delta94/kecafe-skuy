@@ -33,7 +33,7 @@ export default class CarouselCustomer extends React.Component {
     };
   }
 
-  _renderItem({item, index}) {
+  renderItem({item}) {
     return (
       <View
         style={{
@@ -43,7 +43,6 @@ export default class CarouselCustomer extends React.Component {
           width: 300,
           padding: 50,
           marginTop: 5,
-          // marginLeft: 20,
           elevation: 3,
         }}>
         <Text style={{fontSize: 30}}>{item.title}</Text>
@@ -69,14 +68,17 @@ export default class CarouselCustomer extends React.Component {
             height: 160,
           }}>
           <Carousel
-            layout={'default'}
+            layout="default"
             ref={(ref) => (this.carousel = ref)}
             data={this.state.carouselItems}
-            sliderWidth={330}
+            sliderWidth={320}
             itemWidth={300}
-            renderItem={this._renderItem}
+            renderItem={this.renderItem}
             onSnapToItem={(index) => this.setState({activeIndex: index})}
             inactiveSlideOpacity={1}
+            autoplay={true}
+            enableMomentum={false}
+            lockScrollWhileSnapping={true}
           />
         </View>
       </SafeAreaView>

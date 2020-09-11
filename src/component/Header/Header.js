@@ -1,10 +1,10 @@
 import React from 'react';
 import {View, Text, Image, Pressable} from 'react-native';
-import {styles} from './headerStyle';
-import cart_icon from '../../assets/img/cart.png';
+import styles from './headerStyle';
+import cartIcon from '../../assets/img/cart.png';
 import SearchComponent from '../Search/Search';
 
-export const Header = () => {
+const Header = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -12,10 +12,12 @@ export const Header = () => {
         <Pressable
           android_ripple={{color: 'red', radius: 25, borderless: true}}
           style={styles.imageContainer}>
-          <Image style={styles.image} source={cart_icon} />
+          <Image style={styles.image} source={cartIcon} />
         </Pressable>
       </View>
       <SearchComponent />
     </View>
   );
 };
+
+export default Header;

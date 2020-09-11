@@ -1,33 +1,29 @@
-import BottomNavigation, {
-  FullTab,
-} from 'react-native-material-bottom-navigation';
-
 import React from 'react';
+import BottomNavigation, {FullTab} from 'react-native-material-bottom-navigation';
 import {Text, View, Image} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import menu_icon from '../../assets/img/menu.png';
-import order_icon from '../../assets/img/order.png';
-import user_icon from '../../assets/img/user.png';
+import menuIcon from '../../assets/img/menu.png';
+import orderIcon from '../../assets/img/order.png';
+import userIcon from '../../assets/img/user.png';
 
 export default class Navbar extends React.Component {
   tabs = [
     {
       key: 'all-menu',
-      icon: menu_icon,
+      icon: menuIcon,
       label: 'Menu',
       barColor: '#AB84C8',
       pressColor: 'rgba(255, 255, 255, 0.16)',
     },
     {
       key: 'last-order',
-      icon: order_icon,
+      icon: orderIcon,
       label: 'Last Order',
       barColor: '#AB84C8',
       pressColor: 'rgba(255, 255, 255, 0.16)',
     },
     {
       key: 'profile',
-      icon: user_icon,
+      icon: userIcon,
       label: 'Profile',
       barColor: '#AB84C8',
       pressColor: 'rgba(255, 255, 255, 0.16)',
@@ -39,11 +35,7 @@ export default class Navbar extends React.Component {
   };
 
   renderIcon = (icon) => ({isActive}) => (
-    <Image
-      style={{height: 24, width: 24, tintColor: 'white'}}
-      color="white"
-      source={icon}
-    />
+    <Image style={{height: 24, width: 24, tintColor: 'white'}} color="white" source={icon} />
   );
 
   renderTab = ({tab, isActive}) => (
@@ -57,14 +49,14 @@ export default class Navbar extends React.Component {
 
   render() {
     return (
-      <View style={{flex: 1, height: 10}}>
-        <BottomNavigation
-          activeTab={this.state.activeTab}
-          onTabPress={(newTab) => this.setState({activeTab: newTab.key})}
-          renderTab={this.renderTab}
-          tabs={this.tabs}
-        />
-      </View>
+      <BottomNavigation
+        activeTab={this.state.activeTab}
+        onTabPress={(newTab) => this.setState({activeTab: newTab.key})}
+        renderTab={this.renderTab}
+        tabs={this.tabs}
+        useLayoutAnimation={true}
+        style={{borderTopWidth: 0, elevation: 8}}
+      />
     );
   }
 }
