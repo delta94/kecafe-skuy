@@ -1,76 +1,11 @@
 import React, {Component} from 'react';
 import {FlatList, Text, View, Pressable, Image, ScrollView} from 'react-native';
+import {useSelector, useDispatch} from 'react-redux';
 import CartCard from './Cart.Card';
 import takoyaki from '../../assets/img/Takoyaki.jpg';
 import headerStyle from '../Header/headerStyle';
 import backIcon from '../../assets/img/Arrow.png';
 import styles from './style';
-
-const DATA = [
-  {
-    id: 1,
-    name: 'Takoyaki',
-    image: takoyaki,
-    price: 25000,
-    quantity: 3,
-  },
-  {
-    id: 2,
-    name: 'Takoyaki',
-    image: takoyaki,
-    price: 25000,
-    quantity: 3,
-  },
-  {
-    id: 3,
-    name: 'Takoyaki',
-    image: takoyaki,
-    price: 25000,
-    quantity: 3,
-  },
-  {
-    id: 4,
-    name: 'Takoyaki',
-    image: takoyaki,
-    price: 25000,
-    quantity: 3,
-  },
-  {
-    id: 5,
-    name: 'Takoyaki',
-    image: takoyaki,
-    price: 25000,
-    quantity: 3,
-  },
-  {
-    id: 6,
-    name: 'Takoyaki',
-    image: takoyaki,
-    price: 25000,
-    quantity: 3,
-  },
-  {
-    id: 7,
-    name: 'Takoyaki',
-    image: takoyaki,
-    price: 25000,
-    quantity: 3,
-  },
-  {
-    id: 8,
-    name: 'Takoyaki',
-    image: takoyaki,
-    price: 25000,
-    quantity: 3,
-  },
-  {
-    id: 9,
-    name: 'Takoyaki',
-    image: takoyaki,
-    price: 25000,
-    quantity: 3,
-  },
-];
 
 const FooterComponent = (props) => {
   return (
@@ -95,6 +30,9 @@ const CartHeader = (props) => {
     <View style={{...headerStyle.container, height: 55}}>
       <View style={{...headerStyle.header, justifyContent: 'flex-start', heigth: 55}}>
         <Pressable
+          onPress={() => {
+            props.navigation.navigate('AllMenu');
+          }}
           android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 15, borderless: true}}
           style={{width: 22, height: 22, alignSelf: 'center', marginRight: 15}}>
           <Image
@@ -115,22 +53,30 @@ const CartHeader = (props) => {
   );
 };
 
-const Cart = (props) => {
+const Cart = ({navigation}) => {
+  const dispatch = useDispatch();
+  const {cart} = useSelector((state) => state.menuState);
   const renderItem = (item) => {
     return <CartCard key={item.id} menu={item} />;
   };
   return (
     <>
-      <CartHeader />
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        style={styles.menuList}
-        contentInsetAdjustmentBehavior="automatic">
-        {DATA.map((item) => {
-          return renderItem(item);
-        })}
-      </ScrollView>
-      <FooterComponent />
+      <CartHeader navigation={navigation} />
+      {cart.length !== 0 ? (
+        <>
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            style={styles.menuList}
+            contentInsetAdjustmentBehavior="automatic">
+            {cart.map((item) => {
+              return renderItem(item);
+            })}
+          </ScrollView>
+          <FooterComponent />
+        </>
+      ) : (
+        <Text style={{textAlign: 'center', padding: 10}}>Cart is empty</Text>
+      )}
     </>
   );
 };

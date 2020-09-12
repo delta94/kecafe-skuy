@@ -1,6 +1,6 @@
 import React from 'react';
-import BottomNavigation, {FullTab} from 'react-native-material-bottom-navigation';
-import {Text, View, Image} from 'react-native';
+import BottomNavigation, {IconTab} from 'react-native-material-bottom-navigation';
+import {Image} from 'react-native';
 import menuIcon from '../../assets/img/menu.png';
 import orderIcon from '../../assets/img/order.png';
 import userIcon from '../../assets/img/user.png';
@@ -8,14 +8,14 @@ import userIcon from '../../assets/img/user.png';
 export default class Navbar extends React.Component {
   tabs = [
     {
-      key: 'all-menu',
+      key: 'all_menu',
       icon: menuIcon,
       label: 'Menu',
       barColor: '#AB84C8',
       pressColor: 'rgba(255, 255, 255, 0.16)',
     },
     {
-      key: 'last-order',
+      key: 'last_order',
       icon: orderIcon,
       label: 'Last Order',
       barColor: '#AB84C8',
@@ -31,7 +31,7 @@ export default class Navbar extends React.Component {
   ];
 
   state = {
-    activeTab: 'all-menu',
+    activeTab: 'all_menu',
   };
 
   renderIcon = (icon) => ({isActive}) => (
@@ -39,7 +39,7 @@ export default class Navbar extends React.Component {
   );
 
   renderTab = ({tab, isActive}) => (
-    <FullTab
+    <IconTab
       isActive={isActive}
       key={tab.key}
       label={tab.label}

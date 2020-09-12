@@ -1,5 +1,7 @@
-import React, {Component, useState, useRef} from 'react';
-import {FlatList, Dimensions, Text, View, Image, Pressable} from 'react-native';
+import React, {useEffect, useState, useRef} from 'react';
+import {FlatList, Text, View, Image, Pressable} from 'react-native';
+import {useSelector, useDispatch} from 'react-redux';
+import InfiniteScroll from 'react-native-infinite-scrolling';
 import takoyaki from '../../assets/img/Takoyaki.jpg';
 import MenuCardList from './Menu.Card.List';
 import styles from './menuStyle';
@@ -7,6 +9,9 @@ import headerStyle from '../Header/headerStyle';
 import SearchComponent from '../Search/Search';
 import backIcon from '../../assets/img/Arrow.png';
 import MenuDetail from './MenuDetail';
+import {getMenu} from '../../redux/action/menuAction';
+
+const API_URL = 'http://192.168.18.36:8001';
 
 const FooterComponent = () => {
   return (
@@ -90,34 +95,46 @@ const FlatListItemSeparator = () => {
   return <View style={styles.separator} />;
 };
 
+const CustomHeader = (props) => {
+  const {categoryId, navigation} = props;
+  return (
+    <View style={headerStyle.container}>
+      <View style={{...headerStyle.header, justifyContent: 'flex-start'}}>
+        <Pressable
+          onPress={() => {
+            navigation.navigate('AllMenu');
+          }}
+          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 15, borderless: true}}
+          style={{width: 22, height: 22, alignSelf: 'center', marginRight: 15}}>
+          <Image
+            style={{
+              width: '100%',
+              height: '100%',
+              tintColor: 'black',
+              resizeMode: 'cover',
+              alignSelf: 'center',
+            }}
+            source={backIcon}
+          />
+        </Pressable>
+
+        <Text style={headerStyle.headerText}>Main Course</Text>
+      </View>
+      <SearchComponent />
+    </View>
+  );
+};
+
 const MenuList = (props) => {
   const [selectedId, setSelectedId] = useState(0);
   const showRef = useRef();
-  const renderHeader = (props) => {
-    const {category} = props;
-    return (
-      <View style={headerStyle.container}>
-        <View style={{...headerStyle.header, justifyContent: 'flex-start'}}>
-          <Pressable
-            android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 15, borderless: true}}
-            style={{width: 22, height: 22, alignSelf: 'center', marginRight: 15}}>
-            <Image
-              style={{
-                width: '100%',
-                height: '100%',
-                tintColor: 'black',
-                resizeMode: 'cover',
-                alignSelf: 'center',
-              }}
-              source={backIcon}
-            />
-          </Pressable>
+  const {navigation} = props;
+  const categoryId = props.route.params;
+  const {menu, pageInfo, loading} = useSelector((state) => state.menuState);
+  const dispatch = useDispatch();
 
-          <Text style={headerStyle.headerText}>Main Course</Text>
-        </View>
-        <SearchComponent />
-      </View>
-    );
+  const renderHeader = () => {
+    return <CustomHeader navigation={navigation} category={categoryId} />;
   };
 
   const handleCardClicked = (id) => {
@@ -128,15 +145,31 @@ const MenuList = (props) => {
   const renderItem = ({item}) => {
     return <MenuCardList key={item.id} handleCardClicked={handleCardClicked} menu={item} />;
   };
-  let idx = DATA.findIndex((data) => data.id === selectedId);
+
+  const handleFetch = () => {
+    if (pageInfo.nextPage !== undefined && pageInfo.nextPage !== '' && !loading.menuList) {
+      dispatch(getMenu(`${API_URL}${pageInfo.nextPage}`, 'ALL'));
+    }
+  };
+
+  useEffect(() => {
+    dispatch(
+      getMenu(
+        `${API_URL}/menu?search=&filter=${categoryId}&sortby=price&order=ASC&page=1&limit=8`,
+        'ALL'
+      )
+    );
+  }, []);
+
+  let idx = menu.findIndex((data) => data.id === selectedId);
   if (idx < 0) {
     idx = 0;
   }
   return (
     <>
-      <MenuDetail menu={DATA[idx]} ref={showRef} />
+      {menu.length !== 0 ? <MenuDetail menu={menu[idx]} ref={showRef} /> : null}
       <FlatList
-        data={DATA}
+        data={menu}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
         style={styles.menuList}
@@ -144,6 +177,9 @@ const MenuList = (props) => {
         ListFooterComponent={FooterComponent}
         ItemSeparatorComponent={FlatListItemSeparator}
         stickyHeaderIndices={[0]}
+        initialNumToRender={10}
+        onEndReached={handleFetch}
+        onEndReachedThreshold={0.05}
       />
     </>
   );

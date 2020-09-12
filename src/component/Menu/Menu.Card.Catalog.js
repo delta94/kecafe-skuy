@@ -2,7 +2,6 @@ import React from 'react';
 import {Text, View, Image} from 'react-native';
 import {useSelector} from 'react-redux';
 import SkeletonContent from 'react-native-skeleton-content-nonexpo';
-import takoyaki from '../../assets/img/Takoyaki.jpg';
 import noImage from '../../assets/img/no-image-1.jpg';
 import styles from './menuStyle';
 
@@ -14,7 +13,9 @@ const CardCatalog = (props) => {
       <SkeletonContent
         containerStyle={styles.cardImageContainer}
         layout={styles.cardImage}
-        isLoading={loading}>
+        isLoading={
+          loading.mainCoursePrev || loading.dessertPrev || loading.beveragePrev || loading.snackPrev
+        }>
         <Image
           style={styles.cardImage}
           source={menu.image_path ? {uri: menu.image_path} : noImage}
@@ -24,7 +25,12 @@ const CardCatalog = (props) => {
         <SkeletonContent
           containerStyle={styles.cardTextContainer}
           layout={[styles.cardTextPrice, styles.cardTextPrice, styles.cardTextPrice]}
-          isLoading={loading}>
+          isLoading={
+            loading.mainCoursePrev ||
+            loading.dessertPrev ||
+            loading.beveragePrev ||
+            loading.snackPrev
+          }>
           <Text numberOfLines={2} style={styles.cardTextTitle}>
             {menu.name ? menu.name : ''}
           </Text>

@@ -11,7 +11,10 @@ const Header = (props) => {
         <Text style={styles.headerText}>All Menu</Text>
         <Pressable
           android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 25, borderless: true}}
-          style={styles.imageContainer}>
+          style={styles.imageContainer}
+          onPress={() => {
+            props.navigation.navigate('Cart');
+          }}>
           <Image style={styles.image} source={cartIcon} />
         </Pressable>
       </View>

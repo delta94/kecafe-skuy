@@ -1,7 +1,12 @@
 import React from 'react';
-import {View, Text, SafeAreaView} from 'react-native';
-
+import {View, Text, SafeAreaView, Image} from 'react-native';
 import Carousel from 'react-native-snap-carousel';
+
+import imageCarousel1 from '../../assets/img/carousel1.jpg';
+import imageCarousel2 from '../../assets/img/carousel2.jpg';
+import imageCarousel3 from '../../assets/img/carousel3.jpg';
+import imageCarousel4 from '../../assets/img/carousel4.jpg';
+import imageCarousel5 from '../../assets/img/carousel5.jpg';
 
 export default class CarouselCustomer extends React.Component {
   constructor(props) {
@@ -12,44 +17,50 @@ export default class CarouselCustomer extends React.Component {
         {
           title: 'Item 1',
           text: 'Text 1',
+          image: imageCarousel1,
         },
         {
           title: 'Item 2',
           text: 'Text 2',
+          image: imageCarousel2,
         },
         {
           title: 'Item 3',
           text: 'Text 3',
+          image: imageCarousel3,
         },
         {
           title: 'Item 4',
           text: 'Text 4',
+          image: imageCarousel4,
         },
         {
           title: 'Item 5',
           text: 'Text 5',
+          image: imageCarousel5,
         },
       ],
     };
   }
 
-  renderItem({item}) {
+  renderItem = ({item}) => {
     return (
       <View
         style={{
-          backgroundColor: 'floralwhite',
+          backgroundColor: 'white',
           borderRadius: 5,
           height: 150,
           width: 300,
-          padding: 50,
           marginTop: 5,
           elevation: 3,
         }}>
-        <Text style={{fontSize: 30}}>{item.title}</Text>
-        <Text>{item.text}</Text>
+        <Image
+          style={{width: '100%', height: '100%', resizeMode: 'cover', borderRadius: 5}}
+          source={item.image}
+        />
       </View>
     );
-  }
+  };
 
   render() {
     return (
@@ -79,6 +90,7 @@ export default class CarouselCustomer extends React.Component {
             autoplay={true}
             enableMomentum={false}
             lockScrollWhileSnapping={true}
+            loop={true}
           />
         </View>
       </SafeAreaView>

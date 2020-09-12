@@ -2,36 +2,60 @@
 import {actions, pending, fulfilled, rejected} from './actionTypes';
 import * as apiCalls from '../../utils/apicalls';
 
-const getMenuPreviewRequest = () => {
+const getMenuRequest = (menuType) => {
   return {
-    type: actions.getMenuPreview + pending,
+    type: actions.getMenu + pending,
+    payload: {menuType},
   };
 };
 
-const getMenuPreviewFulfilled = (menu, menuType) => {
+const getMenuFulfilled = (data, menuType) => {
   return {
-    type: actions.getMenuPreview + fulfilled,
-    payload: {menu, menuType},
+    type: actions.getMenu + fulfilled,
+    payload: {data, menuType},
   };
 };
 
-const getMenuPreviewRejected = (error) => {
+const getMenuRejected = (error) => {
   return {
-    type: actions.getMenuPreview + rejected,
+    type: actions.getMenu + rejected,
     payload: {error},
   };
 };
 
-export const getMenuPreview = (url, menuType) => {
+export const changeQuantity = (id, num) => {
+  return {
+    type: actions.changeQuantity,
+    payload: {id, num},
+  };
+};
+
+export const addToCart = (id) => {
+  return {
+    type: actions.addToCart,
+    payload: {id},
+  };
+};
+
+export const removeFromCart = (id) => {
+  return {
+    type: actions.removeFromCart,
+    payload: {id},
+  };
+};
+
+export const getMenu = (url, menuType) => {
   return (dispatch) => {
-    dispatch(getMenuPreviewRequest());
+    dispatch(getMenuRequest(menuType));
     apiCalls
       .getData(url)
       .then((res) => {
-        dispatch(getMenuPreviewFulfilled(res.data.menu, menuType));
+        // console.log(res.data);
+        dispatch(getMenuFulfilled(res.data, menuType));
       })
       .catch((error) => {
-        dispatch(getMenuPreviewRejected(error));
+        console.log(error);
+        dispatch(getMenuRejected(error));
       });
   };
 };
