@@ -10,7 +10,7 @@ const Header = (props) => {
       <View style={styles.header}>
         <Text style={styles.headerText}>All Menu</Text>
         <Pressable
-          android_ripple={{color: 'red', radius: 25, borderless: true}}
+          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 25, borderless: true}}
           style={styles.imageContainer}>
           <Image style={styles.image} source={cartIcon} />
         </Pressable>

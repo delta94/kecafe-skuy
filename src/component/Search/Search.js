@@ -7,7 +7,7 @@ const SearchComponent = () => {
   return (
     <View style={styles.container}>
       <Image style={styles.icon} source={searchIcon} />
-      <TextInput placeholder="Search" style={styles.formField} placeholderTextColor="#8797A0" />
+      <TextInput placeholder="Search" style={styles.formField} placeholderTextColor="#9D9D9F" />
     </View>
   );
 };

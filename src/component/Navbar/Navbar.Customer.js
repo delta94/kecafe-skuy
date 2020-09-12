@@ -55,7 +55,6 @@ export default class Navbar extends React.Component {
         renderTab={this.renderTab}
         tabs={this.tabs}
         useLayoutAnimation={true}
-        style={{borderTopWidth: 0, elevation: 8}}
       />
     );
   }

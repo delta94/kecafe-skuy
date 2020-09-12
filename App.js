@@ -12,6 +12,9 @@ import NavBar from './src/component/Navbar/Navbar.Customer';
 import Header from './src/component/Header/Header';
 import UserViewCustomer from './src/component/UserView/UserView.Customer';
 import MenuList from './src/component/Menu/MenuList';
+import Cart from './src/component/Cart/Cart';
+import LastOrder from './src/component/LastOrder/LastOrder';
+import UserProfile from './src/component/UserProfile/UserProfile';
 
 const App = () => {
   return (
@@ -20,8 +23,12 @@ const App = () => {
       <SafeAreaView>
         {/* <Header /> */}
         {/* <UserViewCustomer /> */}
-        <MenuList />
-        {/* <NavBar /> */}
+        {/* <MenuList /> */}
+        {/* <MenuDetail /> */}
+        {/* <LastOrder /> */}
+        <UserProfile />
+        <NavBar />
+        {/* <Cart /> */}
       </SafeAreaView>
     </>
   );
