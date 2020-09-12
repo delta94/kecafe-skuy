@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {View, Text, Image, StyleSheet, Dimensions} from 'react-native';
 import {Avatar, Accessory} from 'react-native-elements';
 import userIcon from '../../assets/img/user.jpg';
 import headerStyle from '../Header/headerStyle';
+
+const {height, width} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   avatarContainer: {
@@ -10,6 +12,11 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     alignSelf: 'center',
     elevation: 3,
+  },
+  styleContainer: {
+    backgroundColor: 'white',
+    width: '100%',
+    height: height - 111,
   },
 });
 
@@ -27,18 +34,22 @@ const UserProfile = (props) => {
   return (
     <>
       <UserProfileHeader />
-      <View>
-        <View>
-          <Avatar
-            containerStyle={styles.avatarContainer}
-            size={'xlarge'}
-            {...{resizeMode: 'cover'}}
-            rounded
-            source={userIcon}>
-            <Accessory size={32} onPress={() => console.log('Works!')} />
-          </Avatar>
-          <Text style={{fontWeight: 'bold', fontSize: 20, textAlign: 'center'}}>Taufiq Widi</Text>
-        </View>
+      <View style={styles.styleContainer}>
+        <Avatar
+          containerStyle={styles.avatarContainer}
+          size={'xlarge'}
+          {...{resizeMode: 'cover'}}
+          rounded
+          source={userIcon}>
+          <Accessory size={32} onPress={() => console.log('Works!')} />
+        </Avatar>
+        <Text style={{fontWeight: 'bold', fontSize: 20, textAlign: 'center'}}>Taufiq Widi</Text>
+        <Text style={{fontWeight: 'normal', fontSize: 20, textAlign: 'center'}}>
+          Greater Jakarta
+        </Text>
+        <Text style={{fontWeight: 'normal', fontSize: 20, textAlign: 'center'}}>
+          +6281284544654
+        </Text>
       </View>
     </>
   );

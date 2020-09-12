@@ -5,7 +5,7 @@ const {height: windowHeight, width: windowWidth} = Dimensions.get('window');
 const customerStyle = StyleSheet.create({
   scrollView: {
     backgroundColor: 'white',
-    height: windowHeight - 156,
+    height: windowHeight - 192,
     paddingTop: 10,
     paddingBottom: 10,
   },
