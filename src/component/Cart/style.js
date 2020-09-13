@@ -15,6 +15,8 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingBottom: 0,
     paddingTop: 10,
+    borderBottomWidth: 1,
+    borderColor: '#E3E3E7',
   },
   cardCartImage: {
     width: 64,

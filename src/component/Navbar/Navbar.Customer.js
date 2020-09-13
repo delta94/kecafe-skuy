@@ -1,6 +1,7 @@
 import React from 'react';
 import BottomNavigation, {IconTab} from 'react-native-material-bottom-navigation';
 import {Image} from 'react-native';
+import FastImage from 'react-native-fast-image';
 import menuIcon from '../../assets/img/menu.png';
 import orderIcon from '../../assets/img/order.png';
 import userIcon from '../../assets/img/user.png';
@@ -35,7 +36,7 @@ export default class Navbar extends React.Component {
   };
 
   renderIcon = (icon) => ({isActive}) => (
-    <Image style={{height: 24, width: 24, tintColor: 'white'}} color="white" source={icon} />
+    <FastImage style={{height: 24, width: 24, tintColor: 'white'}} color="white" source={icon} />
   );
 
   renderTab = ({tab, isActive}) => (

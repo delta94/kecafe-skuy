@@ -1,5 +1,6 @@
 import React, {useRef} from 'react';
 import {View, Image, Text, Pressable} from 'react-native';
+import FastImage from 'react-native-fast-image'
 import SkeletonContent from 'react-native-skeleton-content-nonexpo';
 import {useSelector, useDispatch} from 'react-redux';
 import {changeQuantity, addToCart} from '../../redux/action/menuAction';
@@ -81,7 +82,7 @@ const CardList = (props) => {
             containerStyle={styles.cardListImage}
             layout={styles.cardListImage}
             isLoading={loading.menuList}>
-            <Image
+            <FastImage
               style={styles.cardListImage}
               source={menu.image_path ? {uri: menu.image_path} : noImage}
             />

@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   },
   menuList: {
     backgroundColor: 'white',
-    height: '100%',
+    height,
   },
   cardListContainer: {
     display: 'flex',
@@ -91,9 +91,9 @@ const styles = StyleSheet.create({
   cardListButtonContainer: {
     // backgroundColor: '#AB84C8',
     alignSelf: 'flex-end',
-    width: 64,
-    height: 24,
-    elevation: 2,
+    width: 72,
+    height: 28,
+    elevation: 3,
     borderRadius: 3,
     marginRight: 10,
     marginBottom: 10,
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#AB84C8',
     width: '100%',
     height: '100%',
-    paddingTop: 2,
+    paddingTop: 3,
     paddingBottom: 2,
   },
   cardListButtonText: {
@@ -138,8 +138,8 @@ const styles = StyleSheet.create({
   },
   counterButtonContainer: {
     alignSelf: 'flex-end',
-    width: 68,
-    height: 26,
+    width: 72,
+    height: 28,
     marginRight: 10,
     marginBottom: 10,
     borderRadius: 3,
@@ -147,7 +147,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    elevation: 2,
+    elevation: 3,
+    paddingTop: 2,
   },
   counterButtonContainerText: {
     fontSize: 16,

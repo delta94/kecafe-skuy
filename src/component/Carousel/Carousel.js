@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, SafeAreaView, Image} from 'react-native';
+import FastImage from 'react-native-fast-image';
 import Carousel from 'react-native-snap-carousel';
 
 import imageCarousel1 from '../../assets/img/carousel1.jpg';
@@ -54,7 +55,7 @@ export default class CarouselCustomer extends React.Component {
           marginTop: 5,
           elevation: 3,
         }}>
-        <Image
+        <FastImage
           style={{width: '100%', height: '100%', resizeMode: 'cover', borderRadius: 5}}
           source={item.image}
         />

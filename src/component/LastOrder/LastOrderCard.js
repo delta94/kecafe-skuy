@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import {Image, Text, View, StyleSheet} from 'react-native';
+import FastImage from 'react-native-fast-image';
 import styles from './style';
 
 const RenderMenu = ({item}) => {
   return (
     <View style={{display: 'flex', flexDirection: 'row', padding: 10}}>
       <View style={styles.imageContainer}>
-        <Image style={styles.imageStyle} source={item.image} />
+        <FastImage style={styles.imageStyle} source={item.image} />
       </View>
       <View style={styles.textCont}>
         <Text numberOfLines={2} style={styles.nameText}>

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {FlatList, Text, View, Pressable, Image, ScrollView} from 'react-native';
+import FastImage from 'react-native-fast-image';
 import {useSelector, useDispatch} from 'react-redux';
 import CartCard from './Cart.Card';
 import takoyaki from '../../assets/img/Takoyaki.jpg';
@@ -12,8 +13,8 @@ const FooterComponent = (props) => {
     <View style={styles.footerContainer}>
       <Pressable
         android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: false}}
-        style={{...styles.button, backgroundColor: '#E3E3E7'}}>
-        <Text style={{...styles.buttonText, color: 'black'}}>Cancel</Text>
+        style={{...styles.button, backgroundColor: '#E4304B'}}>
+        <Text style={styles.buttonText}>Cancel</Text>
       </Pressable>
       <Pressable
         android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: false}}
@@ -35,7 +36,7 @@ const CartHeader = (props) => {
           }}
           android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 15, borderless: true}}
           style={{width: 22, height: 22, alignSelf: 'center', marginRight: 15}}>
-          <Image
+          <FastImage
             style={{
               width: '100%',
               height: '100%',

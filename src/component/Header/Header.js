@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, Image, Pressable} from 'react-native';
+import FastImage from 'react-native-fast-image';
 import styles from './headerStyle';
 import cartIcon from '../../assets/img/cart.png';
 import SearchComponent from '../Search/Search';
@@ -15,10 +16,10 @@ const Header = (props) => {
           onPress={() => {
             props.navigation.navigate('Cart');
           }}>
-          <Image style={styles.image} source={cartIcon} />
+          <FastImage style={styles.image} source={cartIcon} />
         </Pressable>
       </View>
-      <SearchComponent />
+      <SearchComponent navigation={props.navigation} />
     </View>
   );
 };

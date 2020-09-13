@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, Image, Pressable} from 'react-native';
+import FastImage from 'react-native-fast-image';
 import {useDispatch} from 'react-redux';
 import {changeQuantity} from '../../redux/action/menuAction';
 import styles from './style';
@@ -42,7 +43,7 @@ const CartCard = (props) => {
   return (
     <>
       <View style={styles.cardCartContainer}>
-        <Image style={styles.cardCartImage} source={{uri: menu.image_path}} />
+        <FastImage style={styles.cardCartImage} source={{uri: menu.image_path}} />
         <View style={styles.cardCartTextContainer}>
           <Text numberOfLines={2} style={styles.cardCartTitleText}>
             {menu.name}

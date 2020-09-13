@@ -1,6 +1,7 @@
 import React from 'react';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import {Image} from 'react-native';
+import FastImage from 'react-native-fast-image';
 import LastOrder from '../component/LastOrder/LastOrder';
 import UserProfile from '../component/UserProfile/UserProfile';
 import UserView from '../component/UserView/UserView.Customer';
@@ -23,9 +24,10 @@ function ScreenWithNavbar() {
         options={{
           tabBarLabel: 'Menu',
           tabBarIcon: () => (
-            <Image
+            <FastImage
               style={{height: 24, width: 24, tintColor: 'white'}}
               color="white"
+              tintColor="white"
               source={menuIcon}
             />
           ),
@@ -37,9 +39,10 @@ function ScreenWithNavbar() {
         options={{
           tabBarLabel: 'Last Order',
           tabBarIcon: () => (
-            <Image
+            <FastImage
               style={{height: 24, width: 24, tintColor: 'white'}}
               color="white"
+              tintColor="white"
               source={orderIcon}
             />
           ),
@@ -51,8 +54,9 @@ function ScreenWithNavbar() {
         options={{
           tabBarLabel: 'Profile',
           tabBarIcon: () => (
-            <Image
-              style={{height: 24, width: 24, tintColor: 'white'}}
+            <FastImage
+              style={{height: 24, width: 24}}
+              tintColor="white"
               color="white"
               source={userIcon}
             />

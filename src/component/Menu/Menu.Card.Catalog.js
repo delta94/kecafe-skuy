@@ -1,5 +1,6 @@
 import React from 'react';
-import {Text, View, Image} from 'react-native';
+import {Text, View, Image, Pressable} from 'react-native';
+import FastImage from 'react-native-fast-image';
 import {useSelector} from 'react-redux';
 import SkeletonContent from 'react-native-skeleton-content-nonexpo';
 import noImage from '../../assets/img/no-image-1.jpg';
@@ -9,14 +10,18 @@ const CardCatalog = (props) => {
   const {loading} = useSelector((state) => state.menuState);
   const {menu} = props;
   return (
-    <View style={styles.cardContainer}>
+    <Pressable
+      onPress={() => {
+        props.onPressCard(menu.id);
+      }}
+      style={styles.cardContainer}>
       <SkeletonContent
         containerStyle={styles.cardImageContainer}
-        layout={styles.cardImage}
+        // layout={styles.cardImage}
         isLoading={
           loading.mainCoursePrev || loading.dessertPrev || loading.beveragePrev || loading.snackPrev
         }>
-        <Image
+        <FastImage
           style={styles.cardImage}
           source={menu.image_path ? {uri: menu.image_path} : noImage}
         />
@@ -39,7 +44,7 @@ const CardCatalog = (props) => {
           </Text>
         </SkeletonContent>
       </View>
-    </View>
+    </Pressable>
   );
 };
 
