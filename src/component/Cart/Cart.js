@@ -34,7 +34,7 @@ const FooterComponent = (props) => {
       </View>
       <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
         <Pressable
-          onPress={() => {
+          onPressIn={() => {
             const cartId = cart.map((item) => {
               return item.id;
             });

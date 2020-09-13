@@ -92,8 +92,9 @@ const UserViewCustomer = ({navigation}) => {
         <View style={customerStyle.sectionContainer}>
           <Text style={customerStyle.titleText}>Main Course</Text>
           <Pressable
+            hitSlop={44}
             style={customerStyle.seeAllButton}
-            onPress={() => {
+            onPressIn={() => {
               onPressHandle(1);
             }}>
             <Text style={customerStyle.seeAllButtonText}>See All</Text>
@@ -114,7 +115,7 @@ const UserViewCustomer = ({navigation}) => {
           <Text style={customerStyle.titleText}>Dessert</Text>
           <Pressable
             style={customerStyle.seeAllButton}
-            onPress={() => {
+            onPressIn={() => {
               onPressHandle(2);
             }}>
             <Text style={customerStyle.seeAllButtonText}>See All</Text>
@@ -135,7 +136,7 @@ const UserViewCustomer = ({navigation}) => {
           <Text style={customerStyle.titleText}>Beverage</Text>
           <Pressable
             style={customerStyle.seeAllButton}
-            onPress={() => {
+            onPressIn={() => {
               onPressHandle(3);
             }}>
             <Text style={customerStyle.seeAllButtonText}>See All</Text>
@@ -156,7 +157,7 @@ const UserViewCustomer = ({navigation}) => {
           <Text style={customerStyle.titleText}>Snack</Text>
           <Pressable
             style={customerStyle.seeAllButton}
-            onPress={() => {
+            onPressIn={() => {
               onPressHandle(4);
             }}>
             <Text style={customerStyle.seeAllButtonText}>See All</Text>

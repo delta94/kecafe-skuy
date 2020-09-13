@@ -27,9 +27,10 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   imageContainer: {
-    width: 25,
-    height: 25,
+    width: 28,
+    height: 28,
     alignSelf: 'center',
+    // backgroundColor: 'red',
   },
   image: {
     width: '100%',

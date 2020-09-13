@@ -1,6 +1,6 @@
 import React, {useRef} from 'react';
 import {View, Image, Text, Pressable} from 'react-native';
-import FastImage from 'react-native-fast-image'
+import FastImage from 'react-native-fast-image';
 import SkeletonContent from 'react-native-skeleton-content-nonexpo';
 import {useSelector, useDispatch} from 'react-redux';
 import {changeQuantity, addToCart} from '../../redux/action/menuAction';
@@ -20,9 +20,10 @@ const CounterButton = ({menu, cart}) => {
     <>
       <View style={styles.counterButtonContainer}>
         <Pressable
-          onPress={() => {
+          onPressIn={() => {
             dispatch(changeQuantity(menu.id, -1));
           }}
+          style={{width: '35%', height: '100%'}}
           android_ripple={{color: '#E3E3E7', radius: 15, borderless: true}}>
           <Text style={{...styles.counterButtonContainerText, color: '#AB84C8'}}>-</Text>
         </Pressable>
@@ -31,13 +32,15 @@ const CounterButton = ({menu, cart}) => {
             ...styles.counterButtonContainerText,
             fontSize: 12,
             paddingTop: 3,
+            width: '30%',
           }}>
           {quantity}
         </Text>
         <Pressable
-          onPress={() => {
+          onPressIn={() => {
             dispatch(changeQuantity(menu.id, 1));
           }}
+          style={{width: '35%', height: '100%'}}
           android_ripple={{color: '#E3E3E7', radius: 15, borderless: true}}>
           <Text style={{...styles.counterButtonContainerText, color: '#AB84C8'}}>+</Text>
         </Pressable>
@@ -51,7 +54,7 @@ const AddButton = ({id}) => {
   return (
     <View style={styles.cardListButtonContainer}>
       <Pressable
-        onPress={() => {
+        onPressIn={() => {
           dispatch(addToCart(id));
         }}
         android_ripple={{color: '#E3E3E7', radius: 25, borderless: true}}
@@ -76,8 +79,8 @@ const CardList = (props) => {
   }
   return (
     <>
-      <View style={styles.cardListContainer}>
-        <Pressable style={styles.cardListImage} onPress={handleClick}>
+      <Pressable style={styles.cardListContainer} onPressIn={handleClick}>
+        <View style={styles.cardListImage}>
           <SkeletonContent
             containerStyle={styles.cardListImage}
             layout={styles.cardListImage}
@@ -87,8 +90,8 @@ const CardList = (props) => {
               source={menu.image_path ? {uri: menu.image_path} : noImage}
             />
           </SkeletonContent>
-        </Pressable>
-        <Pressable style={styles.cardListTextContainer} onPress={handleClick}>
+        </View>
+        <View style={styles.cardListTextContainer}>
           <SkeletonContent
             containerStyle={styles.cardListTextContainer}
             layout={[
@@ -111,8 +114,8 @@ const CardList = (props) => {
               <Text style={styles.cardListPriceText}>Rp. {menu.price}</Text>
             </View>
           </SkeletonContent>
-        </Pressable>
-      </View>
+        </View>
+      </Pressable>
       <SkeletonContent
         // containerStyle={styles.cardListButtonContainer}
         layout={styles.cardListButtonContainer}

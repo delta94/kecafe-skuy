@@ -11,7 +11,7 @@ const CardCatalog = (props) => {
   const {menu} = props;
   return (
     <Pressable
-      onPress={() => {
+      onPressIn={() => {
         props.onPressCard(menu.id);
       }}
       style={styles.cardContainer}>
