@@ -1,26 +1,57 @@
-import React, {Component} from 'react';
-import {FlatList, Text, View, Pressable, Image, ScrollView} from 'react-native';
+import React from 'react';
+import {Text, View, Pressable, ScrollView} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {useSelector, useDispatch} from 'react-redux';
 import CartCard from './Cart.Card';
-import takoyaki from '../../assets/img/Takoyaki.jpg';
+import {removeFromCart} from '../../redux/action/menuAction';
 import headerStyle from '../Header/headerStyle';
 import backIcon from '../../assets/img/Arrow.png';
 import styles from './style';
 
 const FooterComponent = (props) => {
+  const {cart} = useSelector((state) => state.menuState);
+  const dispatch = useDispatch();
   return (
     <View style={styles.footerContainer}>
-      <Pressable
-        android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: false}}
-        style={{...styles.button, backgroundColor: '#E4304B'}}>
-        <Text style={styles.buttonText}>Cancel</Text>
-      </Pressable>
-      <Pressable
-        android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: false}}
-        style={styles.button}>
-        <Text style={styles.buttonText}>Order</Text>
-      </Pressable>
+      <View
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          padding: 10,
+        }}>
+        <Text style={{fontSize: 16, fontWeight: '700'}}>Total:</Text>
+        <Text style={{fontSize: 16, fontWeight: '700'}}>
+          Rp.{' '}
+          {cart
+            .map((item) => {
+              return item.price * item.quantity;
+            })
+            .reduce((total, val) => {
+              return total + val;
+            }, 0)}
+        </Text>
+      </View>
+      <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
+        <Pressable
+          onPress={() => {
+            const cartId = cart.map((item) => {
+              return item.id;
+            });
+            cartId.forEach((item) => {
+              dispatch(removeFromCart(item));
+            });
+          }}
+          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: false}}
+          style={{...styles.button, backgroundColor: '#E4304B'}}>
+          <Text style={styles.buttonText}>Cancel</Text>
+        </Pressable>
+        <Pressable
+          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: false}}
+          style={styles.button}>
+          <Text style={styles.buttonText}>Order</Text>
+        </Pressable>
+      </View>
     </View>
   );
 };

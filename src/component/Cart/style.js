@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   footerContainer: {
     width: '100%',
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'center',
     borderTopWidth: 1,
     borderColor: '#E3E3E7',
