@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
   cardImageContainer: {
     height: '100%',
     width: '100%',
+    borderRadius: 5,
     maxHeight: 140,
     backgroundColor: 'white',
     elevation: 2,
@@ -155,7 +156,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     elevation: 3,
-    paddingTop: 2,
   },
   counterButtonContainerText: {
     fontSize: 16,

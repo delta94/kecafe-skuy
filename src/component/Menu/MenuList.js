@@ -23,7 +23,7 @@ const CustomHeader = ({navigation, categoryId}) => {
           onPress={() => {
             navigation.navigate('AllMenu');
           }}
-          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 15, borderless: true}}
+          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 15, borderless: false}}
           style={{
             width: 24,
             height: 24,

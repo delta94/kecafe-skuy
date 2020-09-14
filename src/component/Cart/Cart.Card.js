@@ -15,15 +15,16 @@ const CounterButton = ({menu}) => {
           onPress={() => {
             dispatch(changeQuantity(menu.id, -1));
           }}
-          style={{height: '100%', width: '100%'}}
-          android_ripple={{color: '#E3E3E7', radius: 15, borderless: true}}>
+          style={{width: '35%', height: '100%', paddingTop: 2}}
+          android_ripple={{color: '#E3E3E7', radius: 35, borderless: false}}>
           <Text style={{...stylesMenu.counterButtonContainerText, color: '#AB84C8'}}>-</Text>
         </Pressable>
         <Text
           style={{
             ...stylesMenu.counterButtonContainerText,
             fontSize: 12,
-            paddingTop: 3,
+            paddingTop: 5,
+            width: '30%',
           }}>
           {menu.quantity}
         </Text>
@@ -31,8 +32,8 @@ const CounterButton = ({menu}) => {
           onPress={() => {
             dispatch(changeQuantity(menu.id, 1));
           }}
-          style={{height: '100%', width: '100%'}}
-          android_ripple={{color: '#E3E3E7', radius: 15, borderless: true}}>
+          style={{width: '35%', height: '100%', paddingTop: 2}}
+          android_ripple={{color: '#E3E3E7', radius: 35, borderless: false}}>
           <Text style={{...stylesMenu.counterButtonContainerText, color: '#AB84C8'}}>+</Text>
         </Pressable>
       </View>

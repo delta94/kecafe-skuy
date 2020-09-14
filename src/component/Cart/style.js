@@ -4,9 +4,10 @@ const {width, height} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   menuList: {
-    backgroundColor: 'white',
+    backgroundColor: '#E3E3E7',
     width: '100%',
     height: height - 117,
+    elevation: 3,
   },
   cardCartContainer: {
     display: 'flex',
@@ -17,8 +18,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     paddingBottom: 0,
     paddingTop: 10,
-    borderBottomWidth: 1,
-    borderColor: '#E3E3E7',
   },
   cardCartImage: {
     width: 64,
@@ -53,8 +52,10 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
+    backgroundColor: 'white',
     borderTopWidth: 1,
     borderColor: '#E3E3E7',
+    elevation: 10,
   },
   buttonText: {
     textAlign: 'center',
@@ -78,6 +79,31 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: width * 0.55,
     paddingRight: 20,
+  },
+  orderTitle: {
+    borderBottomWidth: 1,
+    borderColor: '#E3E3E7',
+    height: 45,
+    fontSize: 18,
+    fontWeight: 'bold',
+    paddingLeft: 15,
+    paddingTop: 10,
+  },
+  subSection: {
+    backgroundColor: 'white',
+    elevation: 3,
+    marginTop: 10,
+    padding: 5,
+    borderBottomWidth: 1,
+    borderColor: '#E3E3E7',
+  },
+  subTitle: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderColor: '#E3E3E7',
+    borderBottomWidth: 1,
+    padding: 6,
   },
 });
 

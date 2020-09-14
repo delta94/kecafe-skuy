@@ -42,7 +42,7 @@ const CounterButton = ({menu}) => {
             width: '35%',
             heigth: '100%',
           }}
-          android_ripple={{color: '#E3E3E7', radius: 15, borderless: true}}>
+          android_ripple={{color: '#E3E3E7', radius: 40, borderless: false}}>
           <Text
             style={{
               ...styles.counterButtonContainerText,
@@ -71,7 +71,7 @@ const CounterButton = ({menu}) => {
           onPress={() => {
             dispatch(changeQuantity(menu.id, 1));
           }}
-          android_ripple={{color: '#E3E3E7', radius: 15, borderless: true}}>
+          android_ripple={{color: '#E3E3E7', radius: 40, borderless: false}}>
           <Text
             style={{
               ...styles.counterButtonContainerText,

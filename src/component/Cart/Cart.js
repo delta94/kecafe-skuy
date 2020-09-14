@@ -2,14 +2,13 @@ import React from 'react';
 import {Text, View, Pressable, ScrollView} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {useSelector, useDispatch} from 'react-redux';
+import {isEmpty} from 'underscore';
 import CartCard from './Cart.Card';
-import {removeFromCart} from '../../redux/action/menuAction';
 import headerStyle from '../Header/headerStyle';
 import backIcon from '../../assets/img/Arrow.png';
 import styles from './style';
 
 const FooterComponent = (props) => {
-  const {cart} = useSelector((state) => state.menuState);
   const dispatch = useDispatch();
   return (
     <View style={styles.footerContainer}>
@@ -17,20 +16,25 @@ const FooterComponent = (props) => {
         style={{
           display: 'flex',
           flexDirection: 'row',
-          justifyContent: 'space-between',
-          padding: 10,
+          justifyContent: 'flex-start',
+          padding: 8,
+          paddingLeft: 15,
         }}>
-        <Text style={{fontSize: 16, fontWeight: '600'}}>Total</Text>
         <Text style={{fontSize: 16, fontWeight: '700'}}>
-          Rp.{' '}
-          {cart
-            .map((item) => {
-              return item.price * item.quantity;
-            })
-            .reduce((total, val) => {
-              return total + val;
-            }, 0)
-            .toLocaleString('id-ID')}
+          Rp. {props.total.toLocaleString('id-ID')}
+        </Text>
+        <Text
+          style={{
+            marginLeft: 15,
+            color: 'white',
+            paddingLeft: 5,
+            paddingRight: 5,
+            fontSize: 16,
+            fontWeight: '700',
+            backgroundColor: '#AB84C8',
+            borderRadius: 3,
+          }}>
+          Cash
         </Text>
       </View>
       <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
@@ -53,7 +57,7 @@ const CartHeader = (props) => {
           onPress={() => {
             props.navigation.goBack();
           }}
-          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 15, borderless: true}}
+          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 55, borderless: false}}
           style={{width: 22, height: 22, alignSelf: 'center', marginRight: 38}}>
           <FastImage
             style={{
@@ -79,6 +83,17 @@ const Cart = ({navigation}) => {
   const renderItem = (item) => {
     return <CartCard key={item.id} menu={item} />;
   };
+  let price = 0;
+  let ppn = 0;
+  let total = 0;
+  if (!isEmpty(cart)) {
+    price = cart.reduce((total, item) => {
+      return total + item.price * item.quantity;
+    }, 0);
+    ppn = price * 0.1;
+    total = price + ppn;
+  }
+
   return (
     <>
       <CartHeader navigation={navigation} />
@@ -88,11 +103,38 @@ const Cart = ({navigation}) => {
             showsVerticalScrollIndicator={false}
             style={styles.menuList}
             contentInsetAdjustmentBehavior="automatic">
-            {cart.map((item) => {
-              return renderItem(item);
-            })}
+            <View
+              style={{
+                backgroundColor: 'white',
+                elevation: 3,
+                marginTop: 10,
+              }}>
+              <Text style={styles.orderTitle}>Order item(s)</Text>
+              {cart.map((item) => {
+                return renderItem(item);
+              })}
+            </View>
+            <View style={styles.subSection}>
+              <Text style={{fontSize: 18, fontWeight: 'bold', padding: 10}}>Payment details</Text>
+              <View style={{margin: 10, borderWidth: 1, borderColor: '#E3E3E7', borderRadius: 5}}>
+                <View style={styles.subTitle}>
+                  <Text style={{fontSize: 16}}>Price</Text>
+                  <Text style={{fontSize: 16}}>{price.toLocaleString('id-ID')}</Text>
+                </View>
+                <View style={styles.subTitle}>
+                  <Text style={{fontSize: 16}}>Ppn</Text>
+                  <Text style={{fontSize: 16}}>{ppn.toLocaleString('id-ID')}</Text>
+                </View>
+                <View style={{...styles.subTitle, borderBottomWidth: 0}}>
+                  <Text style={{fontWeight: 'bold', fontSize: 16}}>Total payment</Text>
+                  <Text style={{fontWeight: 'bold', fontSize: 16}}>
+                    {total.toLocaleString('id-ID')}
+                  </Text>
+                </View>
+              </View>
+            </View>
           </ScrollView>
-          <FooterComponent />
+          <FooterComponent total={total} />
         </>
       ) : (
         <Text style={{textAlign: 'center', padding: 10}}>Cart is empty</Text>
