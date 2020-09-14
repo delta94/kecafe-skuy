@@ -2,7 +2,6 @@ import React, {useEffect, useState, useRef} from 'react';
 import {ScrollView, View, Text, Pressable} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {getMenu} from '../../redux/action/menuAction';
-import {isEmpty} from 'underscore';
 import CardCatalog from '../Menu/Menu.Card.Catalog';
 import MenuDetail from '../Menu/MenuDetail';
 import customerStyle from './style';

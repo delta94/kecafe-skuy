@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   menuList: {
     backgroundColor: 'white',
     width: '100%',
-    height: height - 111,
+    height: height - 55,
   },
   imageContainer: {
     height: 64,

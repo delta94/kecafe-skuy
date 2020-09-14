@@ -7,11 +7,18 @@ import styles from './style';
 import searchIcon from '../../assets/img/search.webp';
 import {API_URL} from '../../utils/environment';
 
-const SearchComponent = ({categoryId, navigation}) => {
+const SearchComponent = ({categoryId, navigation, ...rest}) => {
   const dispatch = useDispatch();
   const [search, setSearch] = useState('');
+  let style = {};
+  if (rest.style !== undefined) {
+    style = rest.style;
+  }
   return (
-    <View style={styles.container}>
+    <View
+      style={
+        rest.style !== undefined ? {...styles.container, width: style.width} : styles.container
+      }>
       <FastImage style={styles.icon} source={searchIcon} />
       <TextInput
         onChangeText={(e) => {

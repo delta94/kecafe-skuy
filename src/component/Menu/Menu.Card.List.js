@@ -57,7 +57,7 @@ const AddButton = ({menu}) => {
         onPress={() => {
           dispatch(addToCart(menu));
         }}
-        android_ripple={{color: 'rgba(0,0,0,0.4)', radius: 35, borderless: false}}
+        android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: false}}
         style={styles.cardListButton}>
         <Text style={styles.cardListButtonText}>Add +</Text>
       </Pressable>

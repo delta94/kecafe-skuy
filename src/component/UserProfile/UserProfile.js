@@ -1,8 +1,10 @@
-import React, {Component} from 'react';
-import {View, Text, Image, StyleSheet, Dimensions} from 'react-native';
+import React from 'react';
+import {View, Text, Pressable, StyleSheet, Dimensions} from 'react-native';
 import {Avatar, Accessory} from 'react-native-elements';
+import FastImage from 'react-native-fast-image';
 import userIcon from '../../assets/img/user.jpg';
 import headerStyle from '../Header/headerStyle';
+import backIcon from '../../assets/img/Arrow.png';
 
 const {height, width} = Dimensions.get('window');
 
@@ -16,14 +18,36 @@ const styles = StyleSheet.create({
   styleContainer: {
     backgroundColor: 'white',
     width: '100%',
-    height: height - 111,
+    height: height - 55,
   },
 });
 
-const UserProfileHeader = (props) => {
+const UserProfileHeader = ({navigation}) => {
   return (
     <View style={{...headerStyle.container, height: 55}}>
       <View style={{...headerStyle.header, justifyContent: 'flex-start', heigth: 55}}>
+        <Pressable
+          onPress={() => {
+            navigation.navigate('AllMenu');
+          }}
+          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 15, borderless: false}}
+          style={{
+            width: 24,
+            height: 24,
+            alignSelf: 'center',
+            marginRight: 38,
+          }}>
+          <FastImage
+            style={{
+              width: '100%',
+              height: '100%',
+              alignSelf: 'center',
+            }}
+            tintColor="black"
+            resizeMode="cover"
+            source={backIcon}
+          />
+        </Pressable>
         <Text style={headerStyle.headerText}>Profile</Text>
       </View>
     </View>
@@ -33,7 +57,7 @@ const UserProfileHeader = (props) => {
 const UserProfile = (props) => {
   return (
     <>
-      <UserProfileHeader />
+      <UserProfileHeader navigation={props.navigation} />
       <View style={styles.styleContainer}>
         <Avatar
           containerStyle={styles.avatarContainer}

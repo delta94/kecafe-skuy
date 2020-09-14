@@ -42,7 +42,7 @@ const CounterButton = ({menu}) => {
             width: '35%',
             heigth: '100%',
           }}
-          android_ripple={{color: '#E3E3E7', radius: 40, borderless: false}}>
+          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 40, borderless: false}}>
           <Text
             style={{
               ...styles.counterButtonContainerText,
@@ -71,7 +71,7 @@ const CounterButton = ({menu}) => {
           onPress={() => {
             dispatch(changeQuantity(menu.id, 1));
           }}
-          android_ripple={{color: '#E3E3E7', radius: 40, borderless: false}}>
+          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 40, borderless: false}}>
           <Text
             style={{
               ...styles.counterButtonContainerText,
@@ -147,7 +147,7 @@ class MenuDetail extends Component {
               onPress={() => {
                 this.props.addToCart(menu);
               }}
-              android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 25, borderless: false}}
+              android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: false}}
               style={styles.buttonAddCart}>
               <Text style={styles.buttonAddCartText}>Add to cart</Text>
             </Pressable>

@@ -143,11 +143,11 @@ const MenuList = React.memo((props) => {
         onEndReached={() => {
           handleFetch(pageInfo, loading, dispatch);
         }}
-        onEndReachedThreshold={0.1}
+        onEndReachedThreshold={0.2}
       />
       {onCart > 0 ? (
         <Pressable
-          android_ripple={{color: 'rgba(0,0,0,0.4)', radius: 25, borderless: false}}
+          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 25, borderless: false}}
           onPress={() => {
             navigation.navigate('Cart');
           }}
