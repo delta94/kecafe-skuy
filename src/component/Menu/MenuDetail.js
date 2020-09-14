@@ -1,9 +1,10 @@
 /* eslint-disable no-nested-ternary */
-import React, {Component, useState, useRef} from 'react';
-import {View, Image, Text, StyleSheet, Dimensions, Pressable} from 'react-native';
+import React, {Component} from 'react';
+import {View, Text, StyleSheet, Dimensions, Pressable} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {connect, useDispatch, useSelector} from 'react-redux';
 import {addToCart, changeQuantity} from '../../redux/action/menuAction';
+import {isEmpty} from 'underscore';
 import Modal from 'react-native-modal';
 import styles from './menuStyle';
 import noImage from '../../assets/img/no-image-1.jpg';
@@ -24,15 +25,17 @@ const CounterButton = ({menu}) => {
         style={{
           ...styles.counterButtonContainer,
           paddingTop: 0,
-          width: 0.9 * Dimensions.get('window').width,
+          width: 0.5 * Dimensions.get('window').width,
           height: 42,
           alignSelf: 'center',
           marginRight: 0,
           borderRadius: 5,
-          backgroundColor: '#AB84C8',
+          borderWidth: 1,
+          borderColor: '#E3E3E7',
+          backgroundColor: 'white',
         }}>
         <Pressable
-          onPressIn={() => {
+          onPress={() => {
             dispatch(changeQuantity(menu.id, -1));
           }}
           style={{
@@ -43,7 +46,7 @@ const CounterButton = ({menu}) => {
           <Text
             style={{
               ...styles.counterButtonContainerText,
-              color: 'white',
+              color: '#AB84C8',
               fontSize: 24,
               paddingTop: 3,
             }}>
@@ -56,7 +59,7 @@ const CounterButton = ({menu}) => {
             fontSize: 20,
             paddingTop: 5,
             width: '30%',
-            color: 'white',
+            color: 'black',
           }}>
           {quantity}
         </Text>
@@ -65,14 +68,14 @@ const CounterButton = ({menu}) => {
             width: '35%',
             heigth: '100%',
           }}
-          onPressIn={() => {
+          onPress={() => {
             dispatch(changeQuantity(menu.id, 1));
           }}
           android_ripple={{color: '#E3E3E7', radius: 15, borderless: true}}>
           <Text
             style={{
               ...styles.counterButtonContainerText,
-              color: 'white',
+              color: '#AB84C8',
               fontSize: 24,
               paddingTop: 3,
             }}>
@@ -98,7 +101,12 @@ class MenuDetail extends Component {
 
   render() {
     const {menu} = this.props;
-
+    let idx = -1;
+    if (!isEmpty(this.props.cart)) {
+      idx = this.props.cart.findIndex((item) => {
+        return item.id === menu.id;
+      });
+    }
     return (
       <Modal
         style={styles.modalContainer}
@@ -116,6 +124,7 @@ class MenuDetail extends Component {
           <View style={styles.imageContainer}>
             <FastImage
               style={styles.modalImage}
+              resizeMode="cover"
               source={menu.image_path !== undefined ? {uri: menu.image_path} : noImage}
             />
           </View>
@@ -128,28 +137,17 @@ class MenuDetail extends Component {
           <View style={styles.priceTextWrapper}>
             <Text style={styles.priceText}>Price</Text>
             <Text style={{...styles.priceText, fontWeight: '700'}}>
-              Rp. {menu.price ? menu.price : 0}
+              Rp. {menu.price !== undefined ? menu.price.toLocaleString('id-ID') : 0}
             </Text>
           </View>
-          {this.props.cart.length > 0 ? (
-            this.props.cart.findIndex((item) => menu.id === item.id) < 0 ? (
-              <Pressable
-                onPressIn={() => {
-                  this.props.addToCart(menu.id);
-                }}
-                android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 25, borderless: false}}
-                style={styles.buttonAddCart}>
-                <Text style={styles.buttonAddCartText}>Add to cart</Text>
-              </Pressable>
-            ) : (
-              <CounterButton menu={menu} />
-            )
+          {idx >= 0 ? (
+            <CounterButton menu={menu} />
           ) : (
             <Pressable
-              onPressIn={() => {
-                this.props.addToCart(menu.id);
+              onPress={() => {
+                this.props.addToCart(menu);
               }}
-              android_ripple={{color: 'rgba(0,0,0,0.4)', radius: 25, borderless: false}}
+              android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 25, borderless: false}}
               style={styles.buttonAddCart}>
               <Text style={styles.buttonAddCartText}>Add to cart</Text>
             </Pressable>

@@ -20,7 +20,7 @@ const FooterComponent = (props) => {
           justifyContent: 'space-between',
           padding: 10,
         }}>
-        <Text style={{fontSize: 16, fontWeight: '700'}}>Total:</Text>
+        <Text style={{fontSize: 16, fontWeight: '600'}}>Total</Text>
         <Text style={{fontSize: 16, fontWeight: '700'}}>
           Rp.{' '}
           {cart
@@ -29,23 +29,11 @@ const FooterComponent = (props) => {
             })
             .reduce((total, val) => {
               return total + val;
-            }, 0)}
+            }, 0)
+            .toLocaleString('id-ID')}
         </Text>
       </View>
       <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
-        <Pressable
-          onPressIn={() => {
-            const cartId = cart.map((item) => {
-              return item.id;
-            });
-            cartId.forEach((item) => {
-              dispatch(removeFromCart(item));
-            });
-          }}
-          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: false}}
-          style={{...styles.button, backgroundColor: '#E4304B'}}>
-          <Text style={styles.buttonText}>Cancel</Text>
-        </Pressable>
         <Pressable
           android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: false}}
           style={styles.button}>
@@ -63,10 +51,10 @@ const CartHeader = (props) => {
       <View style={{...headerStyle.header, justifyContent: 'flex-start', heigth: 55}}>
         <Pressable
           onPress={() => {
-            props.navigation.navigate('AllMenu');
+            props.navigation.goBack();
           }}
           android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 15, borderless: true}}
-          style={{width: 22, height: 22, alignSelf: 'center', marginRight: 15}}>
+          style={{width: 22, height: 22, alignSelf: 'center', marginRight: 38}}>
           <FastImage
             style={{
               width: '100%',

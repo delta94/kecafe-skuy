@@ -15,6 +15,7 @@ const CounterButton = ({menu}) => {
           onPress={() => {
             dispatch(changeQuantity(menu.id, -1));
           }}
+          style={{height: '100%', width: '100%'}}
           android_ripple={{color: '#E3E3E7', radius: 15, borderless: true}}>
           <Text style={{...stylesMenu.counterButtonContainerText, color: '#AB84C8'}}>-</Text>
         </Pressable>
@@ -30,6 +31,7 @@ const CounterButton = ({menu}) => {
           onPress={() => {
             dispatch(changeQuantity(menu.id, 1));
           }}
+          style={{height: '100%', width: '100%'}}
           android_ripple={{color: '#E3E3E7', radius: 15, borderless: true}}>
           <Text style={{...stylesMenu.counterButtonContainerText, color: '#AB84C8'}}>+</Text>
         </Pressable>
@@ -49,7 +51,9 @@ const CartCard = (props) => {
             {menu.name}
           </Text>
           <View style={styles.counterButtonMerge}>
-            <Text style={styles.cardCartPriceText}>Rp. {menu.price * menu.quantity}</Text>
+            <Text style={styles.cardCartPriceText}>
+              Rp. {(menu.price * menu.quantity).toLocaleString('id-ID')}
+            </Text>
             <CounterButton menu={menu} />
           </View>
         </View>

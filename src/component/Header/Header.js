@@ -18,7 +18,7 @@ const Header = (props) => {
           hitSlop={44}
           android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 25, borderless: true}}
           style={styles.imageContainer}
-          onPressIn={() => {
+          onPress={() => {
             props.navigation.navigate('Cart');
           }}>
           <FastImage style={styles.image} source={cartIcon} />

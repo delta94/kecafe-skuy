@@ -1,7 +1,9 @@
+/* eslint-disable no-lonely-if */
 /* eslint-disable no-case-declarations */
 /* eslint-disable no-else-return */
 import {actions, pending, fulfilled, rejected} from '../action/actionTypes';
 import {update} from 'ramda';
+import {isEmpty} from 'underscore';
 
 const initialState = {
   preview: {
@@ -138,17 +140,32 @@ const menuReducer = (state = initialState, action) => {
                 },
               };
             } else {
-              return {
-                ...state,
-                loading: {...state.loading, menuList: false},
-                error: false,
-                msg: 'done',
-                pageInfo: {
-                  prevPage: action.payload.data.pageInfo.prevPage,
-                  currentPage: Number(action.payload.data.pageInfo.page) + 1,
-                  nextPage: action.payload.data.pageInfo.nextPage,
-                },
-              };
+              if (action.payload.data.pageInfo.nextPage !== '') {
+                return {
+                  ...state,
+                  loading: {...state.loading, menuList: false},
+                  error: false,
+                  msg: 'done',
+                  pageInfo: {
+                    prevPage: action.payload.data.pageInfo.prevPage,
+                    currentPage: Number(action.payload.data.pageInfo.page) + 1,
+                    nextPage: action.payload.data.pageInfo.nextPage,
+                  },
+                };
+              } else {
+                return {
+                  ...state,
+                  menu: [],
+                  loading: {...state.loading, menuList: false},
+                  error: false,
+                  msg: 'done',
+                  pageInfo: {
+                    prevPage: action.payload.data.pageInfo.prevPage,
+                    currentPage: Number(action.payload.data.pageInfo.page) + 1,
+                    nextPage: action.payload.data.pageInfo.nextPage,
+                  },
+                };
+              }
             }
           }
           if (action.payload.data.pageInfo.nextPage !== '') {
@@ -213,10 +230,7 @@ const menuReducer = (state = initialState, action) => {
       };
 
     case actions.addToCart:
-      idx = state.menu.findIndex((item) => {
-        return action.payload.id === item.id;
-      });
-      newArr = [...state.cart, state.menu[idx]];
+      newArr = [...state.cart, action.payload.menu];
       return {
         ...state,
         cart: newArr,

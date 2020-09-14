@@ -30,10 +30,10 @@ export const changeQuantity = (id, num) => {
   };
 };
 
-export const addToCart = (id) => {
+export const addToCart = (menu) => {
   return {
     type: actions.addToCart,
-    payload: {id},
+    payload: {menu},
   };
 };
 

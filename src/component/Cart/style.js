@@ -12,7 +12,9 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     width: '100%',
-    padding: 10,
+    padding: 15,
+    // paddingLeft: 15,
+    alignSelf: 'center',
     paddingBottom: 0,
     paddingTop: 10,
     borderBottomWidth: 1,
@@ -59,11 +61,12 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     fontSize: 18,
+    paddingTop: 6,
     alignSelf: 'center',
   },
   button: {
-    width: 100,
-    height: 32,
+    width: 0.9 * width,
+    height: 42,
     backgroundColor: '#AB84C8',
     borderRadius: 5,
     margin: 10,
@@ -74,6 +77,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     width: width * 0.55,
+    paddingRight: 20,
   },
 });
 

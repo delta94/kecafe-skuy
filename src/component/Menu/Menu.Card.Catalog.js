@@ -11,7 +11,7 @@ const CardCatalog = (props) => {
   const {menu} = props;
   return (
     <Pressable
-      onPressIn={() => {
+      onPress={() => {
         props.onPressCard(menu.id);
       }}
       style={styles.cardContainer}>
@@ -40,7 +40,7 @@ const CardCatalog = (props) => {
             {menu.name ? menu.name : ''}
           </Text>
           <Text numberOfLines={1} style={styles.cardTextPrice}>
-            Rp. {menu.price ? menu.price : ''}
+            Rp. {menu.price !== undefined ? menu.price.toLocaleString('id-ID') : ''}
           </Text>
         </SkeletonContent>
       </View>

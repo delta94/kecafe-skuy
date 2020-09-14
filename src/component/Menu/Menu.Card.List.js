@@ -20,11 +20,11 @@ const CounterButton = ({menu, cart}) => {
     <>
       <View style={styles.counterButtonContainer}>
         <Pressable
-          onPressIn={() => {
+          onPress={() => {
             dispatch(changeQuantity(menu.id, -1));
           }}
           style={{width: '35%', height: '100%'}}
-          android_ripple={{color: '#E3E3E7', radius: 15, borderless: true}}>
+          android_ripple={{color: '#E3E3E7', radius: 35, borderless: false}}>
           <Text style={{...styles.counterButtonContainerText, color: '#AB84C8'}}>-</Text>
         </Pressable>
         <Text
@@ -32,16 +32,16 @@ const CounterButton = ({menu, cart}) => {
             ...styles.counterButtonContainerText,
             fontSize: 12,
             paddingTop: 3,
-            width: '30%',
+            // width: '30%',
           }}>
           {quantity}
         </Text>
         <Pressable
-          onPressIn={() => {
+          onPress={() => {
             dispatch(changeQuantity(menu.id, 1));
           }}
           style={{width: '35%', height: '100%'}}
-          android_ripple={{color: '#E3E3E7', radius: 15, borderless: true}}>
+          android_ripple={{color: '#E3E3E7', radius: 35, borderless: false}}>
           <Text style={{...styles.counterButtonContainerText, color: '#AB84C8'}}>+</Text>
         </Pressable>
       </View>
@@ -49,15 +49,15 @@ const CounterButton = ({menu, cart}) => {
   );
 };
 
-const AddButton = ({id}) => {
+const AddButton = ({menu}) => {
   const dispatch = useDispatch();
   return (
     <View style={styles.cardListButtonContainer}>
       <Pressable
-        onPressIn={() => {
-          dispatch(addToCart(id));
+        onPress={() => {
+          dispatch(addToCart(menu));
         }}
-        android_ripple={{color: '#E3E3E7', radius: 25, borderless: true}}
+        android_ripple={{color: 'rgba(0,0,0,0.4)', radius: 35, borderless: false}}
         style={styles.cardListButton}>
         <Text style={styles.cardListButtonText}>Add +</Text>
       </Pressable>
@@ -79,7 +79,7 @@ const CardList = (props) => {
   }
   return (
     <>
-      <Pressable style={styles.cardListContainer} onPressIn={handleClick}>
+      <Pressable style={styles.cardListContainer} onPress={handleClick}>
         <View style={styles.cardListImage}>
           <SkeletonContent
             containerStyle={styles.cardListImage}
@@ -111,7 +111,7 @@ const CardList = (props) => {
                 nostrud aute ut. Officia ad minim do ut tempor. Laborum nulla nisi eu laboris mollit
                 minim minim excepteur sint sit aute incididunt.
               </Text>
-              <Text style={styles.cardListPriceText}>Rp. {menu.price}</Text>
+              <Text style={styles.cardListPriceText}>Rp. {menu.price.toLocaleString('id-ID')}</Text>
             </View>
           </SkeletonContent>
         </View>
@@ -120,7 +120,7 @@ const CardList = (props) => {
         // containerStyle={styles.cardListButtonContainer}
         layout={styles.cardListButtonContainer}
         isLoading={loading.menuList}>
-        {onCart >= 0 ? <CounterButton menu={menu} cart={cart} /> : <AddButton id={menu.id} />}
+        {onCart >= 0 ? <CounterButton menu={menu} cart={cart} /> : <AddButton menu={menu} />}
       </SkeletonContent>
     </>
   );
