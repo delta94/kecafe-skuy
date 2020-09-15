@@ -74,6 +74,12 @@ const UserProfile = (props) => {
         <Text style={{fontWeight: 'normal', fontSize: 20, textAlign: 'center'}}>
           +6281284544654
         </Text>
+        <Pressable
+          onPress={() => {
+            props.navigation.navigate('LastOrder');
+          }}>
+          <Text>History Order</Text>
+        </Pressable>
       </View>
     </>
   );
