@@ -1,9 +1,11 @@
 import React from 'react';
-import {View, Text, ScrollView} from 'react-native';
+import {View, Text, ScrollView, Pressable} from 'react-native';
+import FastImage from 'react-native-fast-image';
 import headerStyle from '../Header/headerStyle';
 import takoyaki from '../../assets/img/Takoyaki.jpg';
 import LastOrderCard from './LastOrderCard';
 import styles from './style';
+import backIcon from '../../assets/img/Arrow.png';
 
 const DATA = [
   {
@@ -59,31 +61,49 @@ const DATA = [
   },
 ];
 
-const LastOrderHeader = (props) => {
+const LastOrderHeader = ({navigation}) => {
   return (
     <View style={{...headerStyle.container, height: 55}}>
       <View style={{...headerStyle.header, justifyContent: 'flex-start', heigth: 55}}>
+        <Pressable
+          onPress={() => {
+            navigation.goBack();
+          }}
+          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 15, borderless: false}}
+          style={{
+            width: 24,
+            height: 24,
+            alignSelf: 'center',
+            marginRight: 38,
+          }}>
+          <FastImage
+            style={{
+              width: '100%',
+              height: '100%',
+              alignSelf: 'center',
+            }}
+            tintColor="black"
+            resizeMode="cover"
+            source={backIcon}
+          />
+        </Pressable>
         <Text style={headerStyle.headerText}>Last Order</Text>
       </View>
     </View>
   );
 };
 
-const LastOrderItem = (menu) => {
-  return <LastOrderCard key={menu.invoice} menu={menu} />;
-};
-
-const LastOrder = () => {
+const LastOrder = (props) => {
   return (
     <>
-      <LastOrderHeader />
+      <LastOrderHeader navigation={props.navigation} />
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={styles.menuList}
         contentInsetAdjustmentBehavior="automatic">
         {DATA.length !== 0 ? (
           DATA.map((menu) => {
-            return LastOrderItem(menu);
+            return <LastOrderCard key={menu.invoice} menu={menu} />;
           })
         ) : (
           <Text style={{textAlign: 'center', padding: 10}}>

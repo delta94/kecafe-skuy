@@ -10,14 +10,12 @@ import {API_URL} from '../../utils/environment';
 const SearchComponent = ({categoryId, navigation, ...rest}) => {
   const dispatch = useDispatch();
   const [search, setSearch] = useState('');
-  let style = {};
-  if (rest.style !== undefined) {
-    style = rest.style;
-  }
   return (
     <View
       style={
-        rest.style !== undefined ? {...styles.container, width: style.width} : styles.container
+        rest.style !== undefined
+          ? {...styles.container, width: rest.style.containerWidth}
+          : styles.container
       }>
       <FastImage style={styles.icon} source={searchIcon} />
       <TextInput
@@ -45,7 +43,11 @@ const SearchComponent = ({categoryId, navigation, ...rest}) => {
           }
         }}
         placeholder="Search"
-        style={styles.formField}
+        style={
+          rest.style !== undefined
+            ? {...styles.formField, width: rest.style.formWidth}
+            : styles.formField
+        }
         placeholderTextColor="#9D9D9F"
         keyboardType="default"
         returnKeyType="done"

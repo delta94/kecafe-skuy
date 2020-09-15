@@ -45,7 +45,10 @@ const Header = (props) => {
           paddingRight: 5,
         }}>
         <SearchComponent
-          style={{width: Dimensions.get('window').width - 70}}
+          style={{
+            containerWidth: Dimensions.get('window').width - 70,
+            formWidth: Dimensions.get('window').width - 120,
+          }}
           navigation={props.navigation}
         />
         <Avatar

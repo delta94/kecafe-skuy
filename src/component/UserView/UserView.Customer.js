@@ -74,7 +74,6 @@ const UserViewCustomer = ({navigation}) => {
         }
       }
     }
-    // console.log(showRef.current);
     showRef.current.showModal();
   };
 
