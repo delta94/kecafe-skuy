@@ -9,13 +9,6 @@ import CarouselCustomer from '../Carousel/Carousel';
 import Header from '../Header/Header';
 import {API_URL} from '../../utils/environment';
 
-const initialState = {
-  mainCourse: {},
-  dessert: {},
-  beverage: {},
-  snack: {},
-};
-
 const UserViewCustomer = ({navigation}) => {
   const {preview} = useSelector((state) => state.menuState);
   const [selectedMenu, setSelectedMenu] = useState({});

@@ -1,5 +1,6 @@
+/* eslint-disable react/jsx-boolean-value */
 import React from 'react';
-import {View, Text, SafeAreaView, Image} from 'react-native';
+import {View, SafeAreaView} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import Carousel from 'react-native-snap-carousel';
 

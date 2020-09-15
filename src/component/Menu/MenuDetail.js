@@ -1,11 +1,12 @@
 /* eslint-disable no-nested-ternary */
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, Dimensions, Pressable} from 'react-native';
+import {View, Text, Dimensions, Pressable} from 'react-native';
+import PropTypes from 'prop-types';
 import FastImage from 'react-native-fast-image';
 import {connect, useDispatch, useSelector} from 'react-redux';
-import {addToCart, changeQuantity} from '../../redux/action/menuAction';
 import {isEmpty} from 'underscore';
 import Modal from 'react-native-modal';
+import {addToCart, changeQuantity} from '../../redux/action/menuAction';
 import styles from './menuStyle';
 import noImage from '../../assets/img/no-image-1.jpg';
 
@@ -87,6 +88,10 @@ const CounterButton = ({menu}) => {
   );
 };
 
+CounterButton.propTypes = {
+  menu: PropTypes.objectOf(PropTypes.any),
+};
+
 class MenuDetail extends Component {
   constructor(props) {
     super(props);
@@ -100,10 +105,10 @@ class MenuDetail extends Component {
   };
 
   render() {
-    const {menu} = this.props;
+    const {menu, cart} = this.props;
     let idx = -1;
-    if (!isEmpty(this.props.cart)) {
-      idx = this.props.cart.findIndex((item) => {
+    if (!isEmpty(cart)) {
+      idx = cart.findIndex((item) => {
         return item.id === menu.id;
       });
     }
@@ -157,6 +162,11 @@ class MenuDetail extends Component {
     );
   }
 }
+
+MenuDetail.propTypes = {
+  menu: PropTypes.objectOf(PropTypes.any),
+  cart: PropTypes.arrayOf(PropTypes.any),
+};
 
 const mapStateToProps = (state) => {
   return {

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {TextInput, View, Image} from 'react-native';
+import {TextInput, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {useDispatch} from 'react-redux';
 import {getMenu} from '../../redux/action/menuAction';
