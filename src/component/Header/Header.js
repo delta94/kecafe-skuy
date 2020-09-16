@@ -9,10 +9,11 @@ import FastImage from 'react-native-fast-image';
 import styles from './headerStyle';
 import cartIcon from '../../assets/img/cart.png';
 import SearchComponent from '../Search/Search';
-import userIcon from '../../assets/img/user.jpg';
+import userIcon from '../../assets/img/person_pp.png';
 
 const Header = (props) => {
   const {cart} = useSelector((state) => state.menuState);
+  const {profile_image} = useSelector((state) => state.authState.session.user);
   const cartCount = cart.length;
   return (
     <View style={styles.container}>
@@ -62,7 +63,7 @@ const Header = (props) => {
             borderWidth: 0.8,
           }}
           rounded
-          source={userIcon}></Avatar>
+          source={profile_image ? profile_image : userIcon}></Avatar>
       </View>
     </View>
   );

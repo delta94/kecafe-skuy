@@ -1,0 +1,101 @@
+/* eslint-disable import/prefer-default-export */
+import {actions, pending, fulfilled, rejected} from './actionTypes';
+import * as apiCalls from '../../utils/apicalls';
+
+const registerPending = () => {
+  return {
+    type: actions.register + pending,
+  };
+};
+
+const registerFulfilled = (data) => {
+  return {
+    type: actions.register + fulfilled,
+    payload: data,
+  };
+};
+
+const registerRejected = (error) => {
+  return {
+    type: actions.register + rejected,
+    payload: {error},
+  };
+};
+
+export const register = (url, data) => {
+  return (dispatch) => {
+    dispatch(registerPending());
+    apiCalls
+      .register(url, data)
+      .then((res) => {
+        if (res.data.isSuccess) {
+          const {
+            first_name,
+            last_name,
+            phone_number,
+            profile_image,
+            level_id,
+            token,
+            msg,
+          } = res.data.data;
+          const user = {first_name, last_name, phone_number, profile_image, level_id};
+          dispatch(registerFulfilled({user, token, msg}));
+        } else {
+          dispatch(registerRejected(res.data.data.msg));
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch(registerRejected(error));
+      });
+  };
+};
+
+const loginPending = () => {
+  return {
+    type: actions.login + pending,
+  };
+};
+
+const loginFulfilled = (data) => {
+  return {
+    type: actions.login + fulfilled,
+    payload: data,
+  };
+};
+
+const loginRejected = (error) => {
+  return {
+    type: actions.login + rejected,
+    payload: {error},
+  };
+};
+
+export const login = (url, data) => {
+  return (dispatch) => {
+    dispatch(loginPending());
+    apiCalls
+      .login(url, data)
+      .then((res) => {
+        console.log(res);
+        if (res.data.isSuccess) {
+          const {
+            first_name,
+            last_name,
+            phone_number,
+            profile_image,
+            level_id,
+            token,
+            msg,
+          } = res.data.data;
+          const user = {first_name, last_name, phone_number, profile_image, level_id};
+          dispatch(loginFulfilled({user, token, msg}));
+        } else {
+          dispatch(loginRejected(res.data.data.msg));
+        }
+      })
+      .catch((error) => {
+        dispatch(loginRejected(error));
+      });
+  };
+};
