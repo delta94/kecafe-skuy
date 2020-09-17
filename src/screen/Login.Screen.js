@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useRef, useEffect} from 'react';
 import {View, Text, Pressable, Dimensions} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {login} from '../redux/action/authAction';
@@ -60,7 +60,7 @@ const newStyle = {
       borderRadius: 3,
       borderBottomWidth: 1,
       marginBottom: 5,
-      borderColor: '#E3E3E7',
+      borderColor: '#959593',
     },
     error: {
       ...textboxView.error,
@@ -68,7 +68,7 @@ const newStyle = {
       borderRadius: 3,
       borderBottomWidth: 1,
       marginBottom: 5,
-      borderColor: '#E3E3E7',
+      borderColor: '#959593',
     },
   },
 };
@@ -130,7 +130,10 @@ const LoginScreen = ({navigation}) => {
         onPress={() => {
           navigation.navigate('Register');
         }}>
-        <Text style={{fontSize: 20, paddingTop: 10, textDecorationLine: 'underline'}}>Sign Up</Text>
+        <Text
+          style={{fontSize: 20, paddingTop: 10, textDecorationLine: 'underline', color: '#AB84C8'}}>
+          Sign Up
+        </Text>
       </Pressable>
     </View>
   );

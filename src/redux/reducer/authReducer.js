@@ -7,7 +7,7 @@ const initialState = {
   },
   error: false,
   msg: '',
-  loading: true,
+  loading: false,
   isValid: false,
 };
 
@@ -63,6 +63,39 @@ const authReducer = (state = initialState, action) => {
         error: true,
         loading: false,
         isValid: false,
+        msg: action.payload.error,
+      };
+    case actions.logout + pending:
+      return {...state, loading: true};
+    case actions.logout + fulfilled:
+      return initialState;
+    case actions.logout + rejected:
+      return {
+        ...state,
+        loading: false,
+        error: true,
+        msg: action.payload.error,
+      };
+    case actions.updateUserData + pending:
+      return {
+        ...state,
+        loading: true,
+      };
+    case actions.updateUserData + fulfilled:
+      return {
+        ...state,
+        session: {
+          ...state.session,
+          user: action.payload.user,
+        },
+        loading: false,
+        error: false,
+      };
+    case actions.updateUserData + rejected:
+      return {
+        ...state,
+        error: true,
+        loading: false,
         msg: action.payload.error,
       };
     default:

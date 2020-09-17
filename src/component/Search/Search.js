@@ -42,7 +42,7 @@ const SearchComponent = ({categoryId, navigation, ...rest}) => {
             navigation.navigate('MenuList');
           }
         }}
-        placeholder="Search"
+        placeholder="What do you want to eat?"
         style={
           rest.style !== undefined
             ? {...styles.formField, width: rest.style.formWidth}

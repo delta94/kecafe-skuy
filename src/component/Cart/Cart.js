@@ -3,6 +3,7 @@ import {Text, View, Pressable, ScrollView} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {useSelector, useDispatch} from 'react-redux';
 import {isEmpty} from 'underscore';
+import emptyCartIcon from '../../assets/img/shopper.png';
 import CartCard from './Cart.Card';
 import headerStyle from '../Header/headerStyle';
 import backIcon from '../../assets/img/Arrow.png';
@@ -57,7 +58,7 @@ const CartHeader = (props) => {
           onPress={() => {
             props.navigation.goBack();
           }}
-          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 55, borderless: false}}
+          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: true}}
           style={{width: 22, height: 22, alignSelf: 'center', marginRight: 38}}>
           <FastImage
             style={{
@@ -73,6 +74,29 @@ const CartHeader = (props) => {
 
         <Text style={headerStyle.headerText}>Cart</Text>
       </View>
+    </View>
+  );
+};
+
+const EmptyCart = () => {
+  return (
+    <View
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        height: '100%',
+        backgroundColor: 'white',
+      }}>
+      <FastImage
+        style={{width: 128, height: 128, alignSelf: 'center', margin: 60}}
+        source={emptyCartIcon}
+        {...{resizeMode: 'cover'}}
+        tintColor="black"
+      />
+      <Text style={{textAlign: 'center', alignSelf: 'center', fontSize: 24}}>
+        Whoops! still nothing in here! Grab some!
+      </Text>
     </View>
   );
 };
@@ -122,7 +146,7 @@ const Cart = ({navigation}) => {
                   <Text style={{fontSize: 16}}>{price.toLocaleString('id-ID')}</Text>
                 </View>
                 <View style={styles.subTitle}>
-                  <Text style={{fontSize: 16}}>Ppn</Text>
+                  <Text style={{fontSize: 16}}>Ppn (10%)</Text>
                   <Text style={{fontSize: 16}}>{ppn.toLocaleString('id-ID')}</Text>
                 </View>
                 <View style={{...styles.subTitle, borderBottomWidth: 0}}>
@@ -137,7 +161,7 @@ const Cart = ({navigation}) => {
           <FooterComponent total={total} />
         </>
       ) : (
-        <Text style={{textAlign: 'center', padding: 10}}>Cart is empty</Text>
+        <EmptyCart />
       )}
     </>
   );

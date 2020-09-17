@@ -7,6 +7,7 @@ export const actions = {
   login: 'USER_LOGIN',
   register: 'USER_REGISTER',
   logout: 'USER_LOGOUT',
+  updateUserData: 'UPDATE_USER_DATA',
 };
 
 export const pending = '_PENDING';

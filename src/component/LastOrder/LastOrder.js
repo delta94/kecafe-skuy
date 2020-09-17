@@ -69,7 +69,7 @@ const LastOrderHeader = ({navigation}) => {
           onPress={() => {
             navigation.goBack();
           }}
-          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 15, borderless: false}}
+          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: true}}
           style={{
             width: 24,
             height: 24,

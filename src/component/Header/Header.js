@@ -13,7 +13,7 @@ import userIcon from '../../assets/img/person_pp.png';
 
 const Header = (props) => {
   const {cart} = useSelector((state) => state.menuState);
-  const {profile_image} = useSelector((state) => state.authState.session.user);
+  const {user} = useSelector((state) => state.authState.session);
   const cartCount = cart.length;
   return (
     <View style={styles.container}>
@@ -63,8 +63,24 @@ const Header = (props) => {
             borderWidth: 0.8,
           }}
           rounded
-          source={profile_image ? profile_image : userIcon}></Avatar>
+          source={user.profile_image !== undefined ? {uri: user.profile_image} : userIcon}></Avatar>
       </View>
+      <Pressable
+        android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: false}}
+        style={{
+          marginLeft: 20,
+          marginRight: 20,
+          height: 28,
+          width: 72,
+          backgroundColor: '#AB84C8',
+          elevation: 3,
+          borderRadius: 3,
+          marginTop: 12,
+        }}>
+        <Text style={{fontWeight: 'bold', fontSize: 18, textAlign: 'center', color: 'white'}}>
+          Filter
+        </Text>
+      </Pressable>
     </View>
   );
 };

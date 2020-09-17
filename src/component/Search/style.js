@@ -4,7 +4,7 @@ const {width: deviceWidth} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
-    width: deviceWidth - 50,
+    width: deviceWidth - 40,
     height: 35,
     display: 'flex',
     flexDirection: 'row',

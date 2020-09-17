@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useRef, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {register} from '../redux/action/authAction';
 import {API_URL} from '../utils/environment';
@@ -73,7 +73,7 @@ const newStyle = {
       borderRadius: 3,
       borderBottomWidth: 1,
       marginBottom: 5,
-      borderColor: '#E3E3E7',
+      borderColor: '#959593',
     },
     error: {
       ...textboxView.error,
@@ -81,7 +81,7 @@ const newStyle = {
       borderRadius: 3,
       borderBottomWidth: 1,
       marginBottom: 5,
-      borderColor: '#E3E3E7',
+      borderColor: '#959593',
     },
   },
 };
@@ -143,14 +143,6 @@ const RegisterScreen = ({navigation}) => {
             if (formValue) {
               dispatch(register(`${API_URL}/auth/register`, formValue));
             }
-            // navigation.reset({
-            //   index: 0,
-            //   routes: [
-            //     {
-            //       name: 'AllMenu',
-            //     },
-            //   ],
-            // });
           }}>
           <FastImage style={{width: 64, height: 64}} source={nextIcon} {...{resizeMode: 'cover'}} />
         </Pressable>
@@ -159,7 +151,10 @@ const RegisterScreen = ({navigation}) => {
         onPress={() => {
           navigation.navigate('Login');
         }}>
-        <Text style={{fontSize: 20, paddingTop: 10, textDecorationLine: 'underline'}}>Sign In</Text>
+        <Text
+          style={{fontSize: 20, paddingTop: 10, textDecorationLine: 'underline', color: '#AB84C8'}}>
+          Sign In
+        </Text>
       </Pressable>
     </View>
   );

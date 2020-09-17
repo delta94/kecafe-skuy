@@ -23,7 +23,7 @@ const CustomHeader = ({navigation, categoryId}) => {
           onPress={() => {
             navigation.navigate('AllMenu');
           }}
-          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 15, borderless: false}}
+          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 25, borderless: true}}
           style={{
             width: 24,
             height: 24,
@@ -55,6 +55,22 @@ const CustomHeader = ({navigation, categoryId}) => {
         </Text>
       </View>
       <SearchComponent categoryId={categoryId} />
+      <Pressable
+        android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: false}}
+        style={{
+          marginLeft: 20,
+          marginRight: 20,
+          height: 28,
+          width: 72,
+          backgroundColor: '#AB84C8',
+          elevation: 3,
+          borderRadius: 3,
+          marginTop: 12,
+        }}>
+        <Text style={{fontWeight: 'bold', fontSize: 18, textAlign: 'center', color: 'white'}}>
+          Filter
+        </Text>
+      </Pressable>
     </View>
   );
 };

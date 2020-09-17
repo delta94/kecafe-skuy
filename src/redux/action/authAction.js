@@ -1,4 +1,5 @@
 /* eslint-disable import/prefer-default-export */
+import AsyncStorage from '@react-native-community/async-storage';
 import {actions, pending, fulfilled, rejected} from './actionTypes';
 import * as apiCalls from '../../utils/apicalls';
 
@@ -96,6 +97,34 @@ export const login = (url, data) => {
       })
       .catch((error) => {
         dispatch(loginRejected(error));
+      });
+  };
+};
+
+export const logout = () => {
+  return (dispatch) => {
+    dispatch({type: actions.logout + pending});
+    AsyncStorage.removeItem('persist:root', (error) => {
+      if (!error) {
+        dispatch({type: actions.logout + fulfilled});
+      } else {
+        dispatch({type: actions.logout + rejected, payload: {error}});
+      }
+    });
+  };
+};
+
+export const updateUserData = (url, data) => {
+  return (dispatch) => {
+    dispatch({type: actions.updateUserData + pending});
+    apiCalls
+      .updateUserData(url, data)
+      .then((res) => {
+        dispatch({type: actions.updateUserData + fulfilled, payload: {user: res.data.data}});
+      })
+      .catch((err) => {
+        dispatch({type: actions.updateUserData + rejected, payload: {error: err}});
+        console.log(err);
       });
   };
 };
