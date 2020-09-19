@@ -78,7 +78,7 @@ const UserViewCustomer = ({navigation}) => {
         showsVerticalScrollIndicator={false}
         style={customerStyle.scrollView}
         contentInsetAdjustmentBehavior="automatic">
-        <Text style={customerStyle.titleText}>Hot Items</Text>
+        <Text style={customerStyle.titleText}>Hot Promo</Text>
         <CarouselCustomer />
         <View style={customerStyle.sectionContainer}>
           <Text style={customerStyle.titleText}>Main Course</Text>

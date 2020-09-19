@@ -20,7 +20,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     maxHeight: 140,
     backgroundColor: 'white',
-    elevation: 2,
   },
   cardImage: {
     borderTopLeftRadius: 5,

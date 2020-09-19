@@ -1,101 +1,18 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-nested-ternary */
 import React, {useEffect, useState, useRef} from 'react';
-import {Text, View, VirtualizedList, Pressable, ScrollView} from 'react-native';
+import {Text, View, VirtualizedList, Pressable} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {useSelector, useDispatch} from 'react-redux';
 import {isEmpty} from 'underscore';
 import MenuCardList from './Menu.Card.List';
+import Header from '../Header/Header';
 import styles from './menuStyle';
-import headerStyle from '../Header/headerStyle';
-import SearchComponent from '../Search/Search';
-import backIcon from '../../assets/img/Arrow.png';
 import MenuDetail from './MenuDetail';
 import {getMenu} from '../../redux/action/menuAction';
 import {API_URL} from '../../utils/environment';
 import foodBag from '../../assets/img/food-delivery.png';
 import notFoundIcon from '../../assets/img/not-found.png';
-
-const CustomHeader = ({navigation, categoryId}) => {
-  return (
-    <View style={headerStyle.container}>
-      <View style={{...headerStyle.header, justifyContent: 'flex-start'}}>
-        <Pressable
-          onPress={() => {
-            navigation.navigate('AllMenu');
-          }}
-          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 25, borderless: true}}
-          style={{
-            width: 24,
-            height: 24,
-            alignSelf: 'center',
-            marginRight: 38,
-          }}>
-          <FastImage
-            style={{
-              width: '100%',
-              height: '100%',
-              alignSelf: 'center',
-            }}
-            tintColor="black"
-            resizeMode="cover"
-            source={backIcon}
-          />
-        </Pressable>
-
-        <Text style={headerStyle.headerText}>
-          {categoryId === 1
-            ? 'Main Course'
-            : categoryId === 2
-            ? 'Dessert'
-            : categoryId === 3
-            ? 'Beverage'
-            : categoryId === 4
-            ? 'Snack'
-            : 'All Menu'}
-        </Text>
-      </View>
-      <SearchComponent categoryId={categoryId} />
-      <ScrollView
-        horizontal={true}
-        contentInsetAdjustmentBehavior="automatic"
-        contentContainerStyle={{justifyContent: 'space-evenly', paddingLeft: 10, paddingRight: 10}}
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-        }}>
-        <Pressable
-          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: false}}
-          style={headerStyle.buttonSmall}>
-          <Text style={{fontWeight: 'bold', fontSize: 18, textAlign: 'center', color: 'white'}}>
-            price
-          </Text>
-        </Pressable>
-        <Pressable
-          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: false}}
-          style={headerStyle.buttonSmall}>
-          <Text style={{fontWeight: 'bold', fontSize: 18, textAlign: 'center', color: 'white'}}>
-            name
-          </Text>
-        </Pressable>
-        <Pressable
-          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: false}}
-          style={headerStyle.buttonSmall}>
-          <Text style={{fontWeight: 'bold', fontSize: 18, textAlign: 'center', color: 'white'}}>
-            added at
-          </Text>
-        </Pressable>
-        <Pressable
-          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: false}}
-          style={headerStyle.buttonLarge}>
-          <Text style={{fontWeight: 'bold', fontSize: 18, textAlign: 'center', color: 'white'}}>
-            updated at
-          </Text>
-        </Pressable>
-      </ScrollView>
-    </View>
-  );
-};
 
 const handleFetch = (pageInfo, loading, dispatch) => {
   if (pageInfo.nextPage !== undefined && pageInfo.nextPage !== '' && !loading.menuList) {
@@ -107,7 +24,9 @@ const MenuList = React.memo((props) => {
   const [selectedId, setSelectedId] = useState(0);
   const showRef = useRef();
   const {navigation} = props;
-  const {categoryId} = props.route.params;
+
+  const params = props.route.params;
+
   const {menu, cart, pageInfo, loading} = useSelector((state) => state.menuState);
   const dispatch = useDispatch();
 
@@ -117,10 +36,10 @@ const MenuList = React.memo((props) => {
   };
 
   useEffect(() => {
-    if (categoryId !== undefined) {
+    if (params !== undefined) {
       dispatch(
         getMenu(
-          `${API_URL}/menu?search=&filter=${categoryId}&sortby=price&order=ASC&page=1&limit=12`,
+          `${API_URL}/menu?search=&filter=${params.categoryId}&sortby=price&order=ASC&page=1&limit=12`,
           'ALL'
         )
       );
@@ -144,12 +63,12 @@ const MenuList = React.memo((props) => {
   return (
     <>
       {menu.length !== 0 ? <MenuDetail menu={menu[idx]} ref={showRef} /> : null}
+      <Header navigation={navigation} categoryId={params ? params.categoryId : undefined} />
       <VirtualizedList
         refreshing={loading.menuList}
         showsVerticalScrollIndicator={false}
         windowSize={10}
         maxToRenderPerBatch={10}
-        removeClippedSubviews={true}
         legacyImplementation={true}
         data={menu}
         getItem={(data, index) => {
@@ -161,9 +80,6 @@ const MenuList = React.memo((props) => {
         }}
         keyExtractor={(item) => item.id.toString()}
         style={styles.menuList}
-        ListHeaderComponent={() => {
-          return <CustomHeader navigation={navigation} categoryId={categoryId} />;
-        }}
         ListFooterComponent={() => {
           return (
             <>
@@ -194,7 +110,6 @@ const MenuList = React.memo((props) => {
         ItemSeparatorComponent={() => {
           return <View style={styles.separator} />;
         }}
-        stickyHeaderIndices={[0]}
         initialNumToRender={12}
         onEndReached={() => {
           handleFetch(pageInfo, loading, dispatch);

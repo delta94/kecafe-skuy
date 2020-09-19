@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {useRoute} from '@react-navigation/native';
 import {TextInput, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {useDispatch} from 'react-redux';
@@ -7,18 +8,15 @@ import styles from './style';
 import searchIcon from '../../assets/img/search.webp';
 import {API_URL} from '../../utils/environment';
 
-const SearchComponent = ({categoryId, navigation, ...rest}) => {
+const SearchComponent = ({categoryId, navigation, isAllMenu, ...rest}) => {
   const dispatch = useDispatch();
   const [search, setSearch] = useState('');
   return (
-    <View
-      style={
-        rest.style !== undefined
-          ? {...styles.container, width: rest.style.containerWidth}
-          : styles.container
-      }>
+    <View style={isAllMenu ? styles.container : styles.containerMenuList}>
       <FastImage style={styles.icon} source={searchIcon} />
       <TextInput
+        autoCapitalize="none"
+        returnKeyLabel="search"
         onChangeText={(e) => {
           setSearch(e);
         }}
@@ -39,15 +37,13 @@ const SearchComponent = ({categoryId, navigation, ...rest}) => {
             );
           }
           if (navigation !== undefined) {
-            navigation.navigate('MenuList');
+            if (route.name !== 'MenuList') {
+              navigation.navigate('MenuList');
+            }
           }
         }}
         placeholder="What do you want to eat?"
-        style={
-          rest.style !== undefined
-            ? {...styles.formField, width: rest.style.formWidth}
-            : styles.formField
-        }
+        style={isAllMenu ? styles.formField : styles.formFieldMenuList}
         placeholderTextColor="#9D9D9F"
         keyboardType="default"
         returnKeyType="done"
