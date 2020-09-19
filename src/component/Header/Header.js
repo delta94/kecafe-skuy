@@ -2,13 +2,15 @@
 /* eslint-disable react/jsx-curly-brace-presence */
 /* eslint-disable react/prop-types */
 import React from 'react';
-import {View, Text, Pressable, Dimensions} from 'react-native';
+import {View, Text, Pressable, Dimensions, ScrollView} from 'react-native';
 import {Badge, Avatar} from 'react-native-elements';
 import {useSelector} from 'react-redux';
+import {isEmpty} from 'underscore';
 import FastImage from 'react-native-fast-image';
 import styles from './headerStyle';
 import cartIcon from '../../assets/img/cart.png';
 import SearchComponent from '../Search/Search';
+import filterIcon from '../../assets/img/filter.png';
 import userIcon from '../../assets/img/person_pp.png';
 
 const Header = (props) => {
@@ -63,24 +65,85 @@ const Header = (props) => {
             borderWidth: 0.8,
           }}
           rounded
-          source={user.profile_image !== undefined ? {uri: user.profile_image} : userIcon}></Avatar>
+          source={!isEmpty(user) ? {uri: user.profile_image} : userIcon}></Avatar>
       </View>
-      <Pressable
-        android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: false}}
+      <ScrollView
+        horizontal={true}
+        contentInsetAdjustmentBehavior="automatic"
+        contentContainerStyle={{justifyContent: 'space-evenly', paddingLeft: 10, paddingRight: 10}}
         style={{
-          marginLeft: 20,
-          marginRight: 20,
-          height: 28,
-          width: 72,
-          backgroundColor: '#AB84C8',
-          elevation: 3,
-          borderRadius: 3,
-          marginTop: 12,
+          display: 'flex',
+          flexDirection: 'row',
         }}>
-        <Text style={{fontWeight: 'bold', fontSize: 18, textAlign: 'center', color: 'white'}}>
-          Filter
-        </Text>
-      </Pressable>
+        <Pressable
+          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: false}}
+          style={styles.buttonSmall}>
+          <Text style={{fontWeight: 'bold', fontSize: 18, textAlign: 'center', color: 'white'}}>
+            price
+          </Text>
+        </Pressable>
+        <Pressable
+          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: false}}
+          style={styles.buttonSmall}>
+          <Text style={{fontWeight: 'bold', fontSize: 18, textAlign: 'center', color: 'white'}}>
+            name
+          </Text>
+        </Pressable>
+        <Pressable
+          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: false}}
+          style={styles.buttonSmall}>
+          <Text style={{fontWeight: 'bold', fontSize: 18, textAlign: 'center', color: 'white'}}>
+            added at
+          </Text>
+        </Pressable>
+        <Pressable
+          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: false}}
+          style={styles.buttonLarge}>
+          <Text style={{fontWeight: 'bold', fontSize: 18, textAlign: 'center', color: 'white'}}>
+            updated at
+          </Text>
+        </Pressable>
+        <Pressable
+          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: false}}
+          style={styles.buttonLarge}
+          onPress={() => {
+            props.onPressHandle(1);
+          }}>
+          <Text style={{fontWeight: 'bold', fontSize: 18, textAlign: 'center', color: 'white'}}>
+            main course
+          </Text>
+        </Pressable>
+        <Pressable
+          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: false}}
+          style={styles.buttonSmall}
+          onPress={() => {
+            props.onPressHandle(2);
+          }}>
+          <Text style={{fontWeight: 'bold', fontSize: 18, textAlign: 'center', color: 'white'}}>
+            desert
+          </Text>
+        </Pressable>
+        <Pressable
+          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: false}}
+          style={styles.buttonSmall}
+          onPress={() => {
+            props.onPressHandle(3);
+          }}>
+          <Text style={{fontWeight: 'bold', fontSize: 18, textAlign: 'center', color: 'white'}}>
+            beverage
+          </Text>
+        </Pressable>
+        <Pressable
+          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: false}}
+          style={styles.buttonSmall}
+          onPress={() => {
+            props.onPressHandle(4);
+          }}>
+          <Text style={{fontWeight: 'bold', fontSize: 18, textAlign: 'center', color: 'white'}}>
+            snack
+          </Text>
+        </Pressable>
+      </ScrollView>
     </View>
   );
 };

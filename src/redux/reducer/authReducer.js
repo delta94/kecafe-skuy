@@ -2,7 +2,13 @@ import {actions, pending, fulfilled, rejected} from '../action/actionTypes';
 
 const initialState = {
   session: {
-    user: {},
+    user: {
+      first_name: '',
+      last_name: '',
+      phone_number: '',
+      profile_image: null,
+      level_id: 1,
+    },
     token: '',
   },
   error: false,

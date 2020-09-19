@@ -37,6 +37,26 @@ const styles = StyleSheet.create({
     height: '100%',
     resizeMode: 'cover',
   },
+  buttonSmall: {
+    height: 28,
+    width: 86,
+    backgroundColor: '#AB84C8',
+    elevation: 3,
+    borderRadius: 3,
+    marginTop: 12,
+    marginLeft: 5,
+    marginRight: 5,
+  },
+  buttonLarge: {
+    height: 28,
+    width: 128,
+    backgroundColor: '#AB84C8',
+    elevation: 3,
+    borderRadius: 3,
+    marginTop: 12,
+    marginLeft: 5,
+    marginRight: 5,
+  },
 });
 
 export default styles;

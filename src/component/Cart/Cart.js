@@ -87,6 +87,8 @@ const EmptyCart = () => {
         justifyContent: 'flex-start',
         height: '100%',
         backgroundColor: 'white',
+        paddingLeft: 50,
+        paddingRight: 50,
       }}>
       <FastImage
         style={{width: 128, height: 128, alignSelf: 'center', margin: 60}}
@@ -94,7 +96,7 @@ const EmptyCart = () => {
         {...{resizeMode: 'cover'}}
         tintColor="black"
       />
-      <Text style={{textAlign: 'center', alignSelf: 'center', fontSize: 24}}>
+      <Text style={{textAlign: 'center', alignSelf: 'center', fontSize: 24, padding: 5}}>
         Whoops! still nothing in here! Grab some!
       </Text>
     </View>

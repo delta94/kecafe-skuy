@@ -4,6 +4,7 @@ export const actions = {
   changeQuantity: 'CHANGE_QUANTITY',
   addToCart: 'ADD_TO_CART',
   removeFromCart: 'REMOVE_FROM_CART',
+  clearCart: 'CLEAR_CART',
   login: 'USER_LOGIN',
   register: 'USER_REGISTER',
   logout: 'USER_LOGOUT',

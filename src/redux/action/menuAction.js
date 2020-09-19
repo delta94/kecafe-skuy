@@ -44,6 +44,12 @@ export const removeFromCart = (id) => {
   };
 };
 
+export const clearCart = () => {
+  return {
+    type: actions.clearCart,
+  };
+};
+
 export const getMenu = (url, menuType) => {
   return (dispatch) => {
     dispatch(getMenuRequest(menuType));

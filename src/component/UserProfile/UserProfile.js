@@ -4,8 +4,10 @@ import {View, Text, Pressable, StyleSheet, Dimensions} from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import {Avatar, Accessory} from 'react-native-elements';
 import {useSelector, useDispatch} from 'react-redux';
-import {logout, updateUserData} from '../../redux/action/authAction';
 import FastImage from 'react-native-fast-image';
+import {isEmpty} from 'underscore';
+import {logout, updateUserData} from '../../redux/action/authAction';
+import {clearCart} from '../../redux/action/menuAction';
 import {API_URL} from '../../utils/environment';
 import userIcon from '../../assets/img/person_pp.png';
 import headerStyle from '../Header/headerStyle';
@@ -91,7 +93,6 @@ const UserProfile = ({navigation}) => {
           type: response.type,
           size: response.fileSize,
         });
-
         dispatch(updateUserData(`${API_URL}/auth/user/3`, formData));
       }
     });
@@ -116,11 +117,7 @@ const UserProfile = ({navigation}) => {
             size={'large'}
             {...{resizeMode: 'cover'}}
             rounded
-            source={
-              session.user.profile_image !== undefined
-                ? {uri: session.user.profile_image}
-                : userIcon
-            }>
+            source={!isEmpty(session.user) ? {uri: session.user.profile_image} : userIcon}>
             <Accessory size={32} onPress={handleAddPhoto} />
           </Avatar>
           <View
@@ -137,7 +134,9 @@ const UserProfile = ({navigation}) => {
                 fontSize: 20,
                 textAlign: 'center',
                 // alignSelf: 'center',
-              }}>{`${session.user.first_name} ${session.user.last_name}`}</Text>
+              }}>
+              {session.user.first_name} {session.user.last_name}
+            </Text>
 
             <Text style={{fontWeight: 'normal', fontSize: 20, textAlign: 'center'}}>
               {session.user.phone_number}
@@ -176,6 +175,7 @@ const UserProfile = ({navigation}) => {
             borderRadius: 5,
           }}
           onPress={() => {
+            dispatch(clearCart());
             dispatch(logout());
           }}>
           <Text style={{color: 'white', fontWeight: 'bold', textAlign: 'center'}}>Log Out</Text>

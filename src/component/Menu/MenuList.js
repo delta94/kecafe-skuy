@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-nested-ternary */
 import React, {useEffect, useState, useRef} from 'react';
-import {Text, View, VirtualizedList, Pressable} from 'react-native';
+import {Text, View, VirtualizedList, Pressable, ScrollView} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {useSelector, useDispatch} from 'react-redux';
 import {isEmpty} from 'underscore';
@@ -14,6 +14,7 @@ import MenuDetail from './MenuDetail';
 import {getMenu} from '../../redux/action/menuAction';
 import {API_URL} from '../../utils/environment';
 import foodBag from '../../assets/img/food-delivery.png';
+import notFoundIcon from '../../assets/img/not-found.png';
 
 const CustomHeader = ({navigation, categoryId}) => {
   return (
@@ -55,22 +56,43 @@ const CustomHeader = ({navigation, categoryId}) => {
         </Text>
       </View>
       <SearchComponent categoryId={categoryId} />
-      <Pressable
-        android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: false}}
+      <ScrollView
+        horizontal={true}
+        contentInsetAdjustmentBehavior="automatic"
+        contentContainerStyle={{justifyContent: 'space-evenly', paddingLeft: 10, paddingRight: 10}}
         style={{
-          marginLeft: 20,
-          marginRight: 20,
-          height: 28,
-          width: 72,
-          backgroundColor: '#AB84C8',
-          elevation: 3,
-          borderRadius: 3,
-          marginTop: 12,
+          display: 'flex',
+          flexDirection: 'row',
         }}>
-        <Text style={{fontWeight: 'bold', fontSize: 18, textAlign: 'center', color: 'white'}}>
-          Filter
-        </Text>
-      </Pressable>
+        <Pressable
+          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: false}}
+          style={headerStyle.buttonSmall}>
+          <Text style={{fontWeight: 'bold', fontSize: 18, textAlign: 'center', color: 'white'}}>
+            price
+          </Text>
+        </Pressable>
+        <Pressable
+          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: false}}
+          style={headerStyle.buttonSmall}>
+          <Text style={{fontWeight: 'bold', fontSize: 18, textAlign: 'center', color: 'white'}}>
+            name
+          </Text>
+        </Pressable>
+        <Pressable
+          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: false}}
+          style={headerStyle.buttonSmall}>
+          <Text style={{fontWeight: 'bold', fontSize: 18, textAlign: 'center', color: 'white'}}>
+            added at
+          </Text>
+        </Pressable>
+        <Pressable
+          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: false}}
+          style={headerStyle.buttonLarge}>
+          <Text style={{fontWeight: 'bold', fontSize: 18, textAlign: 'center', color: 'white'}}>
+            updated at
+          </Text>
+        </Pressable>
+      </ScrollView>
     </View>
   );
 };
@@ -85,7 +107,7 @@ const MenuList = React.memo((props) => {
   const [selectedId, setSelectedId] = useState(0);
   const showRef = useRef();
   const {navigation} = props;
-  const categoryId = props.route.params;
+  const {categoryId} = props.route.params;
   const {menu, cart, pageInfo, loading} = useSelector((state) => state.menuState);
   const dispatch = useDispatch();
 
@@ -145,8 +167,26 @@ const MenuList = React.memo((props) => {
         ListFooterComponent={() => {
           return (
             <>
-              <View style={styles.footerContainer}>
-                <Text style={styles.footerText}>Whoops, you have reach the bottom:)</Text>
+              <View
+                style={
+                  onCart > 0
+                    ? {
+                        ...styles.footerContainer,
+                        height: styles.footerContainerAfterButton.height,
+                      }
+                    : styles.footerContainer
+                }>
+                {!isEmpty(menu) ? (
+                  <Text style={styles.footerText}>Whoops, you have reach the bottom:)</Text>
+                ) : (
+                  <>
+                    <FastImage
+                      source={notFoundIcon}
+                      style={{width: 32, height: 32, resizeMode: 'cover', alignSelf: 'center'}}
+                    />
+                    <Text style={styles.footerText}>oops, menu not found!</Text>
+                  </>
+                )}
               </View>
             </>
           );

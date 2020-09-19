@@ -16,14 +16,14 @@ const styles = StyleSheet.create({
   },
   formField: {
     alignSelf: 'center',
-    padding: 10,
+    padding: 7,
     paddingLeft: 20,
     paddingRight: 20,
     borderRadius: 5,
     textAlignVertical: 'center',
     width: deviceWidth - 100,
     color: '#9D9D9F',
-    fontSize: 12,
+    fontSize: 16,
     height: 35,
   },
   icon: {

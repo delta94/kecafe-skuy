@@ -2,6 +2,8 @@ import {StyleSheet, Dimensions} from 'react-native';
 
 const {width, height} = Dimensions.get('window');
 
+console.log(height);
+
 const styles = StyleSheet.create({
   cardContainer: {
     borderRadius: 5,
@@ -117,7 +119,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   footerContainer: {
-    height: 0.2 * height,
+    // height: 0.2 * height,
     backgroundColor: 'white',
     paddingTop: 8,
     paddingBottom: 12,
@@ -126,6 +128,9 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     marginTop: 10,
     borderColor: '#E3E3E7',
+  },
+  footerContainerAfterButton: {
+    height: 0.2 * height,
   },
   footerText: {
     fontWeight: 'bold',
@@ -168,7 +173,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   container: {
-    height,
+    height: '95%',
+    position: 'absolute',
+    bottom: 0,
     width,
     backgroundColor: 'white',
     display: 'flex',
@@ -191,8 +198,14 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
     borderRadius: 5,
   },
-  menuTextTitle: {
+  menuTextTitleGroup: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     paddingLeft: 0.05 * width,
+    paddingRight: 0.05 * width,
+  },
+  menuTextTitle: {
     fontWeight: 'bold',
     fontSize: 18,
   },
@@ -211,7 +224,7 @@ const styles = StyleSheet.create({
     paddingRight: 0.05 * width,
     color: '#AEAEB0',
     textAlign: 'justify',
-    height: '36%',
+    height: '28%',
     paddingTop: 10,
   },
   priceText: {

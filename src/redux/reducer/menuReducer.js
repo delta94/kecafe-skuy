@@ -244,6 +244,12 @@ const menuReducer = (state = initialState, action) => {
         ...state,
         cart: newArr,
       };
+    case actions.clearCart:
+      newArr = [];
+      return {
+        ...state,
+        cart: newArr,
+      };
 
     default:
       return state;

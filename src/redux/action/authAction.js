@@ -120,7 +120,14 @@ export const updateUserData = (url, data) => {
     apiCalls
       .updateUserData(url, data)
       .then((res) => {
-        dispatch({type: actions.updateUserData + fulfilled, payload: {user: res.data.data}});
+        if (res.data.isSuccess) {
+          dispatch({type: actions.updateUserData + fulfilled, payload: {user: res.data.data}});
+        } else {
+          dispatch({
+            type: actions.updateUserData + rejected,
+            payload: {error: res.data.data.message},
+          });
+        }
       })
       .catch((err) => {
         dispatch({type: actions.updateUserData + rejected, payload: {error: err}});

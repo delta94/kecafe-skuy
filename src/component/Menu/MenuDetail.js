@@ -133,7 +133,12 @@ class MenuDetail extends Component {
               source={menu.image_path !== undefined ? {uri: menu.image_path} : noImage}
             />
           </View>
-          <Text style={styles.menuTextTitle}>{menu.name ? menu.name : 'Menu name'}</Text>
+          <View style={styles.menuTextTitleGroup}>
+            <Text style={styles.menuTextTitle}>{menu.name ? menu.name : 'Menu name'}</Text>
+            <Text style={{...styles.menuTextTitle, color: '#AEAEB0'}}>
+              {menu.category ? menu.category : 'category'}
+            </Text>
+          </View>
           <Text style={styles.descText}>
             {menu.desc
               ? menu.desc

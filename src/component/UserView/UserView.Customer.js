@@ -34,7 +34,7 @@ const UserViewCustomer = ({navigation}) => {
   }, []);
 
   const onPressHandle = (categoryId) => {
-    navigation.navigate('MenuList', categoryId);
+    navigation.navigate('MenuList', {categoryId});
   };
 
   const onPressCard = (id) => {
@@ -73,7 +73,7 @@ const UserViewCustomer = ({navigation}) => {
   return (
     <>
       <MenuDetail menu={selectedMenu} ref={showRef} />
-      <Header navigation={navigation} />
+      <Header navigation={navigation} onPressHandle={onPressHandle} />
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={customerStyle.scrollView}
