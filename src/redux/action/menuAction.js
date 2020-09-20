@@ -65,3 +65,18 @@ export const getMenu = (url, menuType) => {
       });
   };
 };
+
+export const getOrderHistory = (id) => {
+  return (dispatch) => {
+    dispatch({type: actions.getOrderHistory + pending});
+    apiCalls
+      .getOrderHistory(id)
+      .then((res) => {
+        dispatch({type: actions.getOrderHistory + fulfilled, payload: {data: res.data.data}});
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({type: actions.getOrderHistory + rejected, payload: {error: err}});
+      });
+  };
+};

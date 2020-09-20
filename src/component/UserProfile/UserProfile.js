@@ -2,7 +2,7 @@
 import React, {useState} from 'react';
 import {View, Text, Pressable, StyleSheet, Dimensions} from 'react-native';
 import ImagePicker from 'react-native-image-picker';
-import {Avatar, Accessory} from 'react-native-elements';
+import {Avatar, Accessory, Overlay} from 'react-native-elements';
 import {useSelector, useDispatch} from 'react-redux';
 import FastImage from 'react-native-fast-image';
 import {isEmpty} from 'underscore';
@@ -72,6 +72,11 @@ const UserProfileHeader = ({navigation}) => {
 const UserProfile = ({navigation}) => {
   const {session, isValid} = useSelector((state) => state.authState);
   const dispatch = useDispatch();
+  const [isVisible, setVisible] = useState(false);
+
+  const toggleOverlay = () => {
+    setVisible(!isVisible);
+  };
 
   const handleAddPhoto = () => {
     ImagePicker.showImagePicker(options, (response) => {
@@ -93,7 +98,7 @@ const UserProfile = ({navigation}) => {
           type: response.type,
           size: response.fileSize,
         });
-        dispatch(updateUserData(`${API_URL}/auth/user/3`, formData));
+        dispatch(updateUserData(session.user.id, formData));
       }
     });
   };
@@ -109,6 +114,32 @@ const UserProfile = ({navigation}) => {
   }
   return (
     <>
+      <Overlay isVisible={isVisible} onBackdropPress={toggleOverlay}>
+        <>
+          <Text style={{color: 'black', fontWeight: 'bold', textAlign: 'center'}}>
+            Are you sure want to logout?
+          </Text>
+          <Pressable
+            onPress={() => {
+              dispatch(clearCart());
+              dispatch(logout());
+            }}
+            android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 25, borderless: false}}
+            style={{
+              height: 40,
+              backgroundColor: '#E4304B',
+              alignSelf: 'center',
+              width: 100,
+              paddingRight: 20,
+              paddingLeft: 20,
+              paddingTop: 10,
+              marginTop: 10,
+              borderRadius: 5,
+            }}>
+            <Text style={{color: 'white', fontWeight: 'bold', textAlign: 'center'}}>Yes</Text>
+          </Pressable>
+        </>
+      </Overlay>
       <UserProfileHeader navigation={navigation} />
       <View style={styles.styleContainer}>
         <View style={{display: 'flex', flexDirection: 'row', alignSelf: 'center'}}>
@@ -175,8 +206,7 @@ const UserProfile = ({navigation}) => {
             borderRadius: 5,
           }}
           onPress={() => {
-            dispatch(clearCart());
-            dispatch(logout());
+            toggleOverlay();
           }}>
           <Text style={{color: 'white', fontWeight: 'bold', textAlign: 'center'}}>Log Out</Text>
         </Pressable>

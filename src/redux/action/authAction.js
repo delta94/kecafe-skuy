@@ -23,14 +23,15 @@ const registerRejected = (error) => {
   };
 };
 
-export const register = (url, data) => {
+export const register = (data) => {
   return (dispatch) => {
     dispatch(registerPending());
     apiCalls
-      .register(url, data)
+      .register(data)
       .then((res) => {
         if (res.data.isSuccess) {
           const {
+            id,
             first_name,
             last_name,
             phone_number,
@@ -39,7 +40,7 @@ export const register = (url, data) => {
             token,
             msg,
           } = res.data.data;
-          const user = {first_name, last_name, phone_number, profile_image, level_id};
+          const user = {id, first_name, last_name, phone_number, profile_image, level_id};
           dispatch(registerFulfilled({user, token, msg}));
         } else {
           dispatch(registerRejected(res.data.data.msg));
@@ -72,15 +73,16 @@ const loginRejected = (error) => {
   };
 };
 
-export const login = (url, data) => {
+export const login = (data) => {
   return (dispatch) => {
     dispatch(loginPending());
     apiCalls
-      .login(url, data)
+      .login(data)
       .then((res) => {
         console.log(res);
         if (res.data.isSuccess) {
           const {
+            id,
             first_name,
             last_name,
             phone_number,
@@ -89,7 +91,7 @@ export const login = (url, data) => {
             token,
             msg,
           } = res.data.data;
-          const user = {first_name, last_name, phone_number, profile_image, level_id};
+          const user = {id, first_name, last_name, phone_number, profile_image, level_id};
           dispatch(loginFulfilled({user, token, msg}));
         } else {
           dispatch(loginRejected(res.data.data.msg));
@@ -114,11 +116,11 @@ export const logout = () => {
   };
 };
 
-export const updateUserData = (url, data) => {
+export const updateUserData = (id, data) => {
   return (dispatch) => {
     dispatch({type: actions.updateUserData + pending});
     apiCalls
-      .updateUserData(url, data)
+      .updateUserData(id, data)
       .then((res) => {
         if (res.data.isSuccess) {
           dispatch({type: actions.updateUserData + fulfilled, payload: {user: res.data.data}});

@@ -80,6 +80,7 @@ const UserViewCustomer = ({navigation}) => {
         contentInsetAdjustmentBehavior="automatic">
         <Text style={customerStyle.titleText}>Hot Promo</Text>
         <CarouselCustomer />
+        <View style={customerStyle.separator} />
         <View style={customerStyle.sectionContainer}>
           <Text style={customerStyle.titleText}>Main Course</Text>
           <Pressable
@@ -102,6 +103,7 @@ const UserViewCustomer = ({navigation}) => {
             return <CardCatalog key={menu.id} menu={menu} onPressCard={onPressCard} />;
           })}
         </ScrollView>
+        <View style={customerStyle.separator} />
         <View style={customerStyle.sectionContainer}>
           <Text style={customerStyle.titleText}>Dessert</Text>
           <Pressable
@@ -123,6 +125,7 @@ const UserViewCustomer = ({navigation}) => {
             return <CardCatalog key={menu.id} menu={menu} onPressCard={onPressCard} />;
           })}
         </ScrollView>
+        <View style={customerStyle.separator} />
         <View style={customerStyle.sectionContainer}>
           <Text style={customerStyle.titleText}>Beverage</Text>
           <Pressable
@@ -144,6 +147,7 @@ const UserViewCustomer = ({navigation}) => {
             return <CardCatalog key={menu.id} menu={menu} onPressCard={onPressCard} />;
           })}
         </ScrollView>
+        <View style={customerStyle.separator} />
         <View style={customerStyle.sectionContainer}>
           <Text style={customerStyle.titleText}>Snack</Text>
           <Pressable
@@ -165,6 +169,7 @@ const UserViewCustomer = ({navigation}) => {
             return <CardCatalog key={menu.id} menu={menu} onPressCard={onPressCard} />;
           })}
         </ScrollView>
+        <View style={customerStyle.separator} />
       </ScrollView>
     </>
   );

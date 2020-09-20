@@ -18,6 +18,7 @@ import UserProfile from './src/component/UserProfile/UserProfile';
 import UserView from './src/component/UserView/UserView.Customer';
 import LoginScreen from './src/screen/Login.Screen';
 import RegisterScreen from './src/screen/Register.Screen';
+import CheckoutScreen from './src/screen/Checkout.Screen';
 import Cart from './src/component/Cart/Cart';
 import {store, persistor} from './src/redux/store';
 
@@ -38,6 +39,7 @@ const App = () => {
               <Stack.Screen name="Profile" component={UserProfile} />
               <Stack.Screen name="Cart" component={Cart} />
               <Stack.Screen name="MenuList" component={MenuList} />
+              <Stack.Screen name="Checkout" component={CheckoutScreen} />
             </Stack.Navigator>
           </NavigationContainer>
         </PersistGate>

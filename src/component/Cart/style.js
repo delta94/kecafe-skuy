@@ -7,14 +7,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#E3E3E7',
     width: '100%',
     height: height - 117,
-    elevation: 3,
   },
   cardCartContainer: {
     display: 'flex',
     flexDirection: 'row',
     width: '100%',
     padding: 15,
-    // paddingLeft: 15,
     alignSelf: 'center',
     paddingBottom: 0,
     paddingTop: 10,
@@ -55,7 +53,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderTopWidth: 1,
     borderColor: '#E3E3E7',
-    elevation: 10,
+    elevation: 3,
   },
   buttonText: {
     textAlign: 'center',
@@ -94,8 +92,6 @@ const styles = StyleSheet.create({
     elevation: 3,
     marginTop: 10,
     padding: 5,
-    borderBottomWidth: 1,
-    borderColor: '#E3E3E7',
   },
   subTitle: {
     display: 'flex',

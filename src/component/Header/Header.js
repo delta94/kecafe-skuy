@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable react/jsx-curly-brace-presence */
@@ -37,11 +38,21 @@ const Header = ({navigation, categoryId, ...props}) => {
   const [buttonState, setButtonState] = useState(buttonStateInit);
   const [filterState, setFilterState] = useState(filterStateInit);
 
+  const toggleButton = (buttonKey) => {
+    const newState = {...buttonState};
+    for (const key in buttonState) {
+      if (key === buttonKey) {
+        newState[key] = !buttonState[key];
+      } else {
+        newState[key] = false;
+      }
+    }
+    setButtonState(newState);
+  };
+
   const route = useRoute();
 
   const isAllMenu = route.name === 'AllMenu';
-
-  // const toggleButton = ()
 
   const cartCount = cart.length;
   return (
@@ -110,7 +121,7 @@ const Header = ({navigation, categoryId, ...props}) => {
           paddingLeft: 5,
           paddingRight: 5,
         }}>
-        <SearchComponent navigation={navigation} isAllMenu={isAllMenu} />
+        <SearchComponent navigation={navigation} isAllMenu={isAllMenu} filter={filterState} />
         {isAllMenu ? (
           <Avatar
             onPress={() => {
@@ -135,28 +146,62 @@ const Header = ({navigation, categoryId, ...props}) => {
           flexDirection: 'row',
         }}>
         <Pressable
-          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: false}}
+          onPress={() => {
+            toggleButton('price');
+            setFilterState({sort: 'price', order: 'ASC'});
+          }}
           style={buttonState.price ? styles.buttonSmallSelected : styles.buttonSmall}>
-          <FastImage source={priceIcon} style={styles.iconStyle} />
-          <Text style={styles.buttonText}>price</Text>
+          <FastImage
+            source={priceIcon}
+            style={styles.iconStyle}
+            tintColor={buttonState.price ? 'white' : 'black'}
+          />
+          <Text style={buttonState.price ? styles.buttonTextSelected : styles.buttonText}>
+            price
+          </Text>
         </Pressable>
         <Pressable
-          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: false}}
+          onPress={() => {
+            toggleButton('name');
+            setFilterState({sort: 'name', order: 'ASC'});
+          }}
           style={buttonState.name ? styles.buttonSmallSelected : styles.buttonSmall}>
-          <FastImage source={nameIcon} style={styles.iconStyle} />
-          <Text style={styles.buttonText}>name</Text>
+          <FastImage
+            source={nameIcon}
+            style={styles.iconStyle}
+            tintColor={buttonState.name ? 'white' : 'black'}
+          />
+          <Text style={buttonState.name ? styles.buttonTextSelected : styles.buttonText}>name</Text>
         </Pressable>
         <Pressable
-          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: false}}
-          style={buttonState.addedAt ? styles.buttonLargeSelected : styles.buttonLarge}>
-          <FastImage source={addedIcon} style={styles.iconStyle} />
-          <Text style={styles.buttonText}>added at</Text>
+          onPress={() => {
+            toggleButton('addedAt');
+            setFilterState({sort: 'added_at', order: 'DESC'});
+          }}
+          style={buttonState.addedAt ? styles.buttonSmallSelected : styles.buttonSmall}>
+          <FastImage
+            source={addedIcon}
+            style={styles.iconStyle}
+            tintColor={buttonState.addedAt ? 'white' : 'black'}
+          />
+          <Text style={buttonState.addedAt ? styles.buttonTextSelected : styles.buttonText}>
+            added at
+          </Text>
         </Pressable>
         <Pressable
-          android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: false}}
-          style={buttonState.updatedAt ? styles.buttonSmallSelected : styles.buttonLarge}>
-          <FastImage source={updateIcon} style={styles.iconStyle} />
-          <Text style={styles.buttonText}>updated at</Text>
+          onPress={() => {
+            toggleButton('updatedAt');
+            setFilterState({sort: 'updated_at', order: 'DESC'});
+          }}
+          style={buttonState.updatedAt ? styles.buttonLargeSelected : styles.buttonLarge}>
+          <FastImage
+            source={updateIcon}
+            style={styles.iconStyle}
+            tintColor={buttonState.updatedAt ? 'white' : 'black'}
+          />
+          <Text style={buttonState.updatedAt ? styles.buttonTextSelected : styles.buttonText}>
+            updated at
+          </Text>
         </Pressable>
         {isAllMenu ? (
           <>

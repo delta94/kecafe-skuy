@@ -8,9 +8,10 @@ import styles from './style';
 import searchIcon from '../../assets/img/search.webp';
 import {API_URL} from '../../utils/environment';
 
-const SearchComponent = ({categoryId, navigation, isAllMenu, ...rest}) => {
+const SearchComponent = ({categoryId, navigation, isAllMenu, filter, ...props}) => {
   const dispatch = useDispatch();
   const [search, setSearch] = useState('');
+  const route = useRoute();
   return (
     <View style={isAllMenu ? styles.container : styles.containerMenuList}>
       <FastImage style={styles.icon} source={searchIcon} />
@@ -24,14 +25,14 @@ const SearchComponent = ({categoryId, navigation, isAllMenu, ...rest}) => {
           if (categoryId !== undefined) {
             dispatch(
               getMenu(
-                `${API_URL}/menu?search=${search}&filter=${categoryId}&sortby=price&order=ASC&page=1&limit=12`,
+                `${API_URL}/menu?search=${search}&filter=${categoryId}&sortby=${filter.sort}&order=${filter.order}&page=1&limit=12`,
                 'ALL'
               )
             );
           } else {
             dispatch(
               getMenu(
-                `${API_URL}/menu?search=${search}&sortby=price&order=ASC&page=1&limit=12`,
+                `${API_URL}/menu?search=${search}&sortby=${filter.sort}&order=${filter.order}&page=1&limit=12`,
                 'ALL'
               )
             );

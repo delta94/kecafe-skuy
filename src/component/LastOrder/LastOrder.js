@@ -1,5 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, Text, ScrollView, Pressable} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {getOrderHistory} from '../../redux/action/menuAction';
 import FastImage from 'react-native-fast-image';
 import headerStyle from '../Header/headerStyle';
 import takoyaki from '../../assets/img/Takoyaki.jpg';
@@ -10,6 +12,7 @@ import backIcon from '../../assets/img/Arrow.png';
 const DATA = [
   {
     invoice: 12902,
+    cashier: null,
     order_date: '27 September 2020 14:09:27',
     menu: [
       {
@@ -27,6 +30,7 @@ const DATA = [
   },
   {
     invoice: 17382,
+    cashier: null,
     order_date: '27 September 2020 14:09:27',
     menu: [
       {
@@ -44,6 +48,7 @@ const DATA = [
   },
   {
     invoice: 19928,
+    cashier: null,
     order_date: '27 September 2020 14:09:27',
     menu: [
       {
@@ -94,15 +99,23 @@ const LastOrderHeader = ({navigation}) => {
 };
 
 const LastOrder = (props) => {
+  const {session} = useSelector((state) => state.authState);
+  const {lastOrder} = useSelector((state) => state.menuState);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getOrderHistory(session.user.id));
+  }, [dispatch]);
+
   return (
     <>
       <LastOrderHeader navigation={props.navigation} />
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={styles.menuList}
+        contentContainerStyle={{paddingBottom: 10}}
         contentInsetAdjustmentBehavior="automatic">
-        {DATA.length !== 0 ? (
-          DATA.map((menu) => {
+        {lastOrder.length !== 0 ? (
+          lastOrder.map((menu) => {
             return <LastOrderCard key={menu.invoice} menu={menu} />;
           })
         ) : (

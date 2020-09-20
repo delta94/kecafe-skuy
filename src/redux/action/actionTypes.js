@@ -9,6 +9,7 @@ export const actions = {
   register: 'USER_REGISTER',
   logout: 'USER_LOGOUT',
   updateUserData: 'UPDATE_USER_DATA',
+  getOrderHistory: 'GET_ORDER_HISTORY',
 };
 
 export const pending = '_PENDING';

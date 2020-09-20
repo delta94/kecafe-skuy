@@ -14,6 +14,7 @@ const initialState = {
   },
   menu: [],
   cart: [],
+  lastOrder: [],
   pageInfo: {
     prevPage: '',
     currentPage: 1,
@@ -25,6 +26,7 @@ const initialState = {
     dessertPrev: true,
     beveragePrev: true,
     snackPrev: true,
+    lastOrder: true,
   },
   error: false,
   msg: '',
@@ -250,7 +252,35 @@ const menuReducer = (state = initialState, action) => {
         ...state,
         cart: newArr,
       };
-
+    case actions.getOrderHistory + pending:
+      return {
+        ...state,
+        loading: {
+          ...state.loading,
+          lastOrder: true,
+        },
+        msg: 'loading',
+      };
+    case actions.getOrderHistory + fulfilled:
+      return {
+        ...state,
+        loading: {
+          ...state.loading,
+          lastOrder: false,
+        },
+        lastOrder: action.payload.data,
+        msg: 'done',
+      };
+    case actions.getOrderHistory + rejected:
+      return {
+        ...state,
+        loading: {
+          ...state.loading,
+          lastOrder: false,
+        },
+        error: true,
+        msg: action.payload.error,
+      };
     default:
       return state;
   }

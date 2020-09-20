@@ -3,6 +3,7 @@ import {actions, pending, fulfilled, rejected} from '../action/actionTypes';
 const initialState = {
   session: {
     user: {
+      id: 0,
       first_name: '',
       last_name: '',
       phone_number: '',

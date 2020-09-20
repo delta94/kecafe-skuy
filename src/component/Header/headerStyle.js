@@ -68,6 +68,8 @@ const styles = StyleSheet.create({
   buttonSmallSelected: {
     height: 28,
     width: 90,
+    borderWidth: 0.8,
+    borderColor: '#AB84C8',
     backgroundColor: '#AB84C8',
     elevation: 3,
     borderRadius: 3,
@@ -81,6 +83,8 @@ const styles = StyleSheet.create({
   buttonLargeSelected: {
     height: 28,
     width: 120,
+    borderWidth: 0.8,
+    borderColor: '#AB84C8',
     backgroundColor: '#AB84C8',
     elevation: 3,
     borderRadius: 3,
@@ -92,18 +96,18 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
   },
   buttonTextSelected: {
-    fontWeight: 'bold',
-    fontSize: 16,
+    fontWeight: 'normal',
+    fontSize: 14,
     textAlign: 'center',
     color: 'white',
-    paddingTop: 2,
+    paddingTop: 3,
   },
   buttonText: {
     fontWeight: 'normal',
-    fontSize: 16,
+    fontSize: 14,
     textAlign: 'center',
     color: 'black',
-    paddingTop: 2,
+    paddingTop: 3,
   },
   iconStyle: {width: 14, height: 14, alignSelf: 'center', resizeMode: 'cover'},
 });

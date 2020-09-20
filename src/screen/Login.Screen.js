@@ -119,8 +119,7 @@ const LoginScreen = ({navigation}) => {
           onPress={() => {
             const formValue = formRef.current.getValue();
             if (formValue) {
-              //dispatch action
-              dispatch(login(`${API_URL}/auth/login`, formValue));
+              dispatch(login(formValue));
             }
           }}>
           <FastImage style={{width: 64, height: 64}} source={nextIcon} {...{resizeMode: 'cover'}} />

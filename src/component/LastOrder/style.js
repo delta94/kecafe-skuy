@@ -4,7 +4,7 @@ const {height, width} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   menuList: {
-    backgroundColor: 'white',
+    backgroundColor: '#E3E3E7',
     width: '100%',
     height: height - 55,
   },

@@ -10,7 +10,6 @@ import backIcon from '../../assets/img/Arrow.png';
 import styles from './style';
 
 const FooterComponent = (props) => {
-  const dispatch = useDispatch();
   return (
     <View style={styles.footerContainer}>
       <View
@@ -40,6 +39,13 @@ const FooterComponent = (props) => {
       </View>
       <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
         <Pressable
+          onPress={() => {
+            props.navigation.navigate('Checkout', {
+              price: props.price,
+              ppn: props.ppn,
+              total: props.total,
+            });
+          }}
           android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: false}}
           style={styles.button}>
           <Text style={styles.buttonText}>Order</Text>
@@ -128,6 +134,7 @@ const Cart = ({navigation}) => {
           <ScrollView
             showsVerticalScrollIndicator={false}
             style={styles.menuList}
+            contentContainerStyle={{paddingBottom: 10}}
             contentInsetAdjustmentBehavior="automatic">
             <View
               style={{
@@ -160,7 +167,13 @@ const Cart = ({navigation}) => {
               </View>
             </View>
           </ScrollView>
-          <FooterComponent total={total} />
+          <FooterComponent
+            total={total}
+            navigation={navigation}
+            price={price}
+            ppn={ppn}
+            total={total}
+          />
         </>
       ) : (
         <EmptyCart />

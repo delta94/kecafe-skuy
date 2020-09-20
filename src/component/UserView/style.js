@@ -32,6 +32,15 @@ const customerStyle = StyleSheet.create({
     color: '#AB84C8',
     fontWeight: '700',
   },
+  separator: {
+    height: 1,
+    width: windowWidth - 20,
+    backgroundColor: '#E3E3E7',
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 5,
+    marginBottom: 10,
+  },
 });
 
 export default customerStyle;
