@@ -9,63 +9,6 @@ import LastOrderCard from './LastOrderCard';
 import styles from './style';
 import backIcon from '../../assets/img/Arrow.png';
 
-const DATA = [
-  {
-    invoice: 12902,
-    cashier: null,
-    order_date: '27 September 2020 14:09:27',
-    menu: [
-      {
-        name: 'takoyaki',
-        image: takoyaki,
-        quantity: 2,
-      },
-      {
-        name: 'takoyaki',
-        image: takoyaki,
-        quantity: 3,
-      },
-    ],
-    total_amount: 120000,
-  },
-  {
-    invoice: 17382,
-    cashier: null,
-    order_date: '27 September 2020 14:09:27',
-    menu: [
-      {
-        name: 'takoyaki',
-        image: takoyaki,
-        quantity: 2,
-      },
-      {
-        name: 'takoyaki',
-        image: takoyaki,
-        quantity: 3,
-      },
-    ],
-    total_amount: 120000,
-  },
-  {
-    invoice: 19928,
-    cashier: null,
-    order_date: '27 September 2020 14:09:27',
-    menu: [
-      {
-        name: 'takoyaki',
-        image: takoyaki,
-        quantity: 2,
-      },
-      {
-        name: 'takoyaki',
-        image: takoyaki,
-        quantity: 3,
-      },
-    ],
-    total_amount: 120000,
-  },
-];
-
 const LastOrderHeader = ({navigation}) => {
   return (
     <View style={{...headerStyle.container, height: 55}}>

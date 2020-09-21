@@ -13,7 +13,11 @@ const initialState = {
     token: '',
   },
   error: false,
-  msg: '',
+  msg: {
+    login: 'Welcome',
+    register: 'Welcome',
+    logout: 'Logout',
+  },
   loading: false,
   isValid: false,
 };
@@ -34,7 +38,7 @@ const authReducer = (state = initialState, action) => {
           token: action.payload.token,
         },
         error: false,
-        msg: action.payload.msg,
+        msg: {...state.msg, register: action.payload.msg},
         loading: false,
         isValid: true,
       };
@@ -44,7 +48,7 @@ const authReducer = (state = initialState, action) => {
         error: true,
         loading: false,
         isValid: false,
-        msg: action.payload.error,
+        msg: {...state.msg, register: action.payload.error},
       };
     case actions.login + pending:
       return {
@@ -60,7 +64,7 @@ const authReducer = (state = initialState, action) => {
           token: action.payload.token,
         },
         error: false,
-        msg: action.payload.msg,
+        msg: {...state.msg, login: action.payload.msg},
         loading: false,
         isValid: true,
       };
@@ -70,7 +74,7 @@ const authReducer = (state = initialState, action) => {
         error: true,
         loading: false,
         isValid: false,
-        msg: action.payload.error,
+        msg: {...state.msg, login: action.payload.error},
       };
     case actions.logout + pending:
       return {...state, loading: true};
@@ -81,7 +85,7 @@ const authReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: true,
-        msg: action.payload.error,
+        msg: {...state.msg, logout: action.payload.error},
       };
     case actions.updateUserData + pending:
       return {

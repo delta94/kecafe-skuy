@@ -121,7 +121,12 @@ const Header = ({navigation, categoryId, ...props}) => {
           paddingLeft: 5,
           paddingRight: 5,
         }}>
-        <SearchComponent navigation={navigation} isAllMenu={isAllMenu} filter={filterState} />
+        <SearchComponent
+          navigation={navigation}
+          isAllMenu={isAllMenu}
+          filter={filterState}
+          categoryId={categoryId}
+        />
         {isAllMenu ? (
           <Avatar
             onPress={() => {

@@ -1,8 +1,8 @@
-import React, {useRef, useEffect} from 'react';
-import {View, Text, Pressable, Dimensions} from 'react-native';
+import React, {useRef, useEffect, useState, useLayoutEffect} from 'react';
+import {View, Text, Pressable, Dimensions, BackHandler} from 'react-native';
+import {Overlay} from 'react-native-elements';
 import {useSelector, useDispatch} from 'react-redux';
 import {login} from '../redux/action/authAction';
-import {API_URL} from '../utils/environment';
 import FastImage from 'react-native-fast-image';
 import t from 'tcomb-form-native';
 import nextIcon from '../assets/img/next_bg.png';
@@ -88,10 +88,12 @@ const options = {
   },
 };
 
-const LoginScreen = ({navigation}) => {
-  const {isValid} = useSelector((state) => state.authState);
+const LoginScreen = ({navigation, ...props}) => {
+  const {isValid, msg} = useSelector((state) => state.authState);
   const dispatch = useDispatch();
   const formRef = useRef();
+  const [isVisible, setVisible] = useState(false);
+
   if (isValid) {
     navigation.reset({
       index: 0,
@@ -102,39 +104,58 @@ const LoginScreen = ({navigation}) => {
       ],
     });
   }
+
+  const toggleOverlay = () => {
+    setVisible(!isVisible);
+  };
+
   return (
-    <View
-      style={{
-        padding: 0.1 * Dimensions.get('window').width,
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-evenly',
-        height: Dimensions.get('window').height,
-      }}>
-      <Text style={{fontSize: 48, fontWeight: 'bold'}}>Welcome Back</Text>
-      <Form type={User} ref={formRef} options={options} />
-      <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
-        <Text style={{fontSize: 32, fontWeight: 'bold', paddingTop: 10}}>Sign in</Text>
+    <>
+      <Overlay isVisible={isVisible} onBackdropPress={toggleOverlay}>
+        <Text>{msg.login}</Text>
+      </Overlay>
+      <View
+        style={{
+          padding: 0.1 * Dimensions.get('window').width,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-evenly',
+          height: Dimensions.get('window').height,
+        }}>
+        <Text style={{fontSize: 48, fontWeight: 'bold'}}>Welcome Back</Text>
+        <Form type={User} ref={formRef} options={options} />
+        <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+          <Text style={{fontSize: 32, fontWeight: 'bold', paddingTop: 10}}>Sign in</Text>
+          <Pressable
+            onPress={() => {
+              const formValue = formRef.current.getValue();
+              if (formValue) {
+                dispatch(login(formValue));
+              }
+            }}>
+            <FastImage
+              style={{width: 64, height: 64}}
+              source={nextIcon}
+              {...{resizeMode: 'cover'}}
+            />
+          </Pressable>
+        </View>
         <Pressable
           onPress={() => {
-            const formValue = formRef.current.getValue();
-            if (formValue) {
-              dispatch(login(formValue));
-            }
+            navigation.navigate('Register');
           }}>
-          <FastImage style={{width: 64, height: 64}} source={nextIcon} {...{resizeMode: 'cover'}} />
+          <Text
+            style={{
+              fontSize: 20,
+              paddingTop: 10,
+              textDecorationLine: 'underline',
+              color: '#AB84C8',
+            }}>
+            Sign Up
+          </Text>
         </Pressable>
       </View>
-      <Pressable
-        onPress={() => {
-          navigation.navigate('Register');
-        }}>
-        <Text
-          style={{fontSize: 20, paddingTop: 10, textDecorationLine: 'underline', color: '#AB84C8'}}>
-          Sign Up
-        </Text>
-      </Pressable>
-    </View>
+    </>
   );
 };
 

@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   invoiceText: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold',
   },
   textCont: {
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   nameText: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
   },
   quantityText: {
@@ -41,6 +41,15 @@ const styles = StyleSheet.create({
   },
   childText: {
     color: '#AEAEB0',
+  },
+  separator: {
+    height: 1,
+    width: width - 20,
+    backgroundColor: '#E3E3E7',
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 5,
+    marginBottom: 10,
   },
 });
 

@@ -27,6 +27,7 @@ const initialState = {
     beveragePrev: true,
     snackPrev: true,
     lastOrder: true,
+    addOrder: true,
   },
   error: false,
   msg: '',
@@ -280,6 +281,24 @@ const menuReducer = (state = initialState, action) => {
         },
         error: true,
         msg: action.payload.error,
+      };
+    case actions.addOrder + pending:
+      return {
+        ...state,
+        loading: {...state.loading, addOrder: true},
+        msg: 'making order to the cafe...',
+      };
+    case actions.addOrder + fulfilled:
+      return {
+        ...state,
+        loading: {...state.loading, addOrder: false},
+        msg: 'Make order was successful',
+      };
+    case actions.addOrder + rejected:
+      return {
+        ...state,
+        loading: {...state.loading, addOrder: false},
+        msg: 'unable to make order',
       };
     default:
       return state;

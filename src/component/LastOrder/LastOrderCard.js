@@ -1,21 +1,28 @@
 import React, {Component} from 'react';
 import {Image, Text, View, StyleSheet} from 'react-native';
 import FastImage from 'react-native-fast-image';
+import moment from 'moment';
 import styles from './style';
 
 const RenderMenu = ({item}) => {
   return (
-    <View style={{display: 'flex', flexDirection: 'row', padding: 10}}>
-      <View style={styles.imageContainer}>
-        <FastImage style={styles.imageStyle} source={{uri: item.image}} />
+    <>
+      <View style={{display: 'flex', flexDirection: 'row', padding: 10}}>
+        <View style={styles.imageContainer}>
+          <FastImage style={styles.imageStyle} source={{uri: item.image}} />
+        </View>
+        <View style={styles.textCont}>
+          <Text numberOfLines={2} style={styles.nameText}>
+            {item.menu_name}
+          </Text>
+          <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+            <Text style={styles.childText}>{item.menu_quantity}x</Text>
+            <Text style={styles.childText}>Rp. {item.price.toLocaleString('id-ID')}</Text>
+          </View>
+        </View>
       </View>
-      <View style={styles.textCont}>
-        <Text numberOfLines={2} style={styles.nameText}>
-          {item.menu_name}
-        </Text>
-        <Text style={styles.childText}>{item.menu_quantity}x</Text>
-      </View>
-    </View>
+      <View style={styles.separator} />
+    </>
   );
 };
 
@@ -32,8 +39,11 @@ const LastOrderCard = (props) => {
           marginTop: 10,
           elevation: 3,
         }}>
-        <Text style={styles.invoiceText}>Order Number #{menu.invoice}</Text>
-        <Text style={styles.childText}>{menu.order_date}</Text>
+        <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+          <Text style={styles.invoiceText}>Order Invoice</Text>
+          <Text style={styles.invoiceText}>#{menu.invoice}</Text>
+        </View>
+        <Text style={styles.childText}>{moment(menu.order_date).format('LLL')}</Text>
         {menu.menu_order.map((item) => {
           return <RenderMenu item={item} />;
         })}

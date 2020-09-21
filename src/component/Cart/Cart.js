@@ -1,8 +1,10 @@
-import React from 'react';
-import {Text, View, Pressable, ScrollView} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {Text, View, Pressable, ScrollView, ToastAndroid} from 'react-native';
+import {Overlay} from 'react-native-elements';
 import FastImage from 'react-native-fast-image';
 import {useSelector, useDispatch} from 'react-redux';
 import {isEmpty} from 'underscore';
+import {clearCart, addOrder} from '../../redux/action/menuAction';
 import emptyCartIcon from '../../assets/img/shopper.png';
 import CartCard from './Cart.Card';
 import headerStyle from '../Header/headerStyle';
@@ -40,11 +42,7 @@ const FooterComponent = (props) => {
       <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
         <Pressable
           onPress={() => {
-            props.navigation.navigate('Checkout', {
-              price: props.price,
-              ppn: props.ppn,
-              total: props.total,
-            });
+            props.toggleVisible();
           }}
           android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: false}}
           style={styles.button}>
@@ -110,8 +108,12 @@ const EmptyCart = () => {
 };
 
 const Cart = ({navigation}) => {
+  const [isVisible, setVisible] = useState(false);
   const dispatch = useDispatch();
-  const {cart} = useSelector((state) => state.menuState);
+  const {cart, loading, msg} = useSelector((state) => state.menuState);
+  const {session} = useSelector((state) => state.authState);
+  const [invoice, setInvoice] = useState(0);
+
   const renderItem = (item) => {
     return <CartCard key={item.id} menu={item} />;
   };
@@ -126,8 +128,83 @@ const Cart = ({navigation}) => {
     total = price + ppn;
   }
 
+  const toggleVisible = () => {
+    setVisible(!isVisible);
+  };
+
+  useEffect(() => {
+    ToastAndroid.show(msg, ToastAndroid.LONG);
+  }, [loading.addOrder]);
+
+  useEffect(() => {
+    setInvoice(Math.round(Math.random() * 100000));
+  }, []);
+
   return (
     <>
+      <Overlay isVisible={isVisible}>
+        <>
+          <Text style={{fontSize: 20, fontWeight: 'bold'}}>Order the item(s)?</Text>
+          <Pressable
+            onPress={() => {
+              const order = {
+                invoice,
+                customer_id: session.user.id,
+                order_menu: cart.map((item) => {
+                  return {menu_id: item.id, quantity: item.quantity};
+                }),
+                amount: total,
+              };
+              dispatch(addOrder(order));
+              dispatch(clearCart());
+              toggleVisible();
+            }}
+            android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: false}}
+            style={{
+              width: 100,
+              height: 32,
+              backgroundColor: '#AB84C8',
+              alignSelf: 'center',
+              borderRadius: 3,
+              elevation: 2,
+              marginTop: 10,
+            }}>
+            <Text
+              style={{
+                color: 'white',
+                textAlign: 'center',
+                paddingTop: 5,
+                fontSize: 16,
+                fontWeight: 'bold',
+              }}>
+              Order
+            </Text>
+          </Pressable>
+          <Pressable
+            android_ripple={{color: 'rgba(0,0,0,0.2)', radius: 35, borderless: false}}
+            onPress={toggleVisible}
+            style={{
+              width: 100,
+              height: 32,
+              backgroundColor: '#E4304B',
+              alignSelf: 'center',
+              borderRadius: 3,
+              elevation: 2,
+              marginTop: 5,
+            }}>
+            <Text
+              style={{
+                color: 'white',
+                textAlign: 'center',
+                paddingTop: 5,
+                fontSize: 16,
+                fontWeight: 'bold',
+              }}>
+              Cancel
+            </Text>
+          </Pressable>
+        </>
+      </Overlay>
       <CartHeader navigation={navigation} />
       {cart.length !== 0 ? (
         <>
@@ -151,6 +228,10 @@ const Cart = ({navigation}) => {
               <Text style={{fontSize: 18, fontWeight: 'bold', padding: 10}}>Payment details</Text>
               <View style={{margin: 10, borderWidth: 1, borderColor: '#E3E3E7', borderRadius: 5}}>
                 <View style={styles.subTitle}>
+                  <Text style={{fontWeight: 'bold', fontSize: 16}}>Invoice Num.</Text>
+                  <Text style={{fontWeight: 'bold', fontSize: 16}}>#{invoice}</Text>
+                </View>
+                <View style={styles.subTitle}>
                   <Text style={{fontSize: 16}}>Price</Text>
                   <Text style={{fontSize: 16}}>{price.toLocaleString('id-ID')}</Text>
                 </View>
@@ -173,6 +254,7 @@ const Cart = ({navigation}) => {
             price={price}
             ppn={ppn}
             total={total}
+            toggleVisible={toggleVisible}
           />
         </>
       ) : (

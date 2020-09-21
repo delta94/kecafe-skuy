@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useRef} from 'react';
-import {ScrollView, View, Text, Pressable} from 'react-native';
+import {ScrollView, View, Text, Pressable, BackHandler} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {getMenu} from '../../redux/action/menuAction';
 import CardCatalog from '../Menu/Menu.Card.Catalog';
@@ -14,6 +14,15 @@ const UserViewCustomer = ({navigation}) => {
   const [selectedMenu, setSelectedMenu] = useState({});
   const showRef = useRef();
   const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   const backAction = () => {
+  //     BackHandler.exitApp();
+  //     return true;
+  //   };
+  //   BackHandler.addEventListener('hardwareBackPress', backAction);
+  //   return () => BackHandler.removeEventListener('hardwareBackPress', backAction);
+  // }, []);
 
   useEffect(() => {
     dispatch(

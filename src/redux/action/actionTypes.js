@@ -10,6 +10,7 @@ export const actions = {
   logout: 'USER_LOGOUT',
   updateUserData: 'UPDATE_USER_DATA',
   getOrderHistory: 'GET_ORDER_HISTORY',
+  addOrder: 'ADD_ORDER',
 };
 
 export const pending = '_PENDING';

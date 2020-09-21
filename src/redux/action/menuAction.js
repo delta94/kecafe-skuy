@@ -80,3 +80,17 @@ export const getOrderHistory = (id) => {
       });
   };
 };
+
+export const addOrder = (data) => {
+  return (dispatch) => {
+    dispatch({type: actions.addOrder + pending});
+    apiCalls
+      .addOrder(data)
+      .then((res) => {
+        dispatch({type: actions.addOrder + fulfilled, payload: {msg: res.data.data.msg}});
+      })
+      .catch((err) => {
+        dispatch({type: actions.addOrder + rejected, payload: {error: err}});
+      });
+  };
+};
