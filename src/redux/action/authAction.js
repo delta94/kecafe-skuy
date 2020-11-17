@@ -79,7 +79,6 @@ export const login = (data) => {
     apiCalls
       .login(data)
       .then((res) => {
-        console.log(res);
         if (res.data.isSuccess) {
           const {
             id,
@@ -98,6 +97,7 @@ export const login = (data) => {
         }
       })
       .catch((error) => {
+        console.log(error);
         dispatch(loginRejected(error));
       });
   };
