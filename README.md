@@ -14,7 +14,7 @@ This project is currently in test. Users can explore the menu, order the menu, a
 
 #### Example:   
 
-![gif preview](https://raw.githubusercontent.com/mbeaudru/react-native-sample/master/assets/preview.gif)
+![gif preview](https://github.com/tavvfiq/kecafe-skuy/blob/master/preview/preview.gif)
 
 ## Installation and Setup Instructions
 
