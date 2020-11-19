@@ -1,18 +1,13 @@
-## Project Name & Pitch
+<h1 align="center">KeCafe Skuy </h1> 
+<p align="center"><img src="https://github.com/tavvfiq/kecafe-skuy/blob/master/android/app/src/main/res/mipmap-mdpi/ic_launcher_round.png"></p>
+<p align="center" ><img src="https://img.shields.io/badge/Build%20with-React%20Native-61dbfb?style=popout&logo=react"> </p>
 
-#### Example:
-
-KeCafe Skuy
-
-An application used to filter data form Twitter based on user preference, built with React, Redux, JavaScript, and CSS.
 An application used to order the food and drink from your phone with reasonable price in "Gofood" style. built with React Native, Redux, and javascript.
 ## Project Status
 
 This project is currently in test. Users can explore the menu, order the menu, and then checkout. (but not actually checkout. because not yet affiliated with any restaurant).
 
-## Project Screen Shot(s)
-
-#### Example:   
+## Project Preview
 
 ![gif preview](https://github.com/tavvfiq/kecafe-skuy/blob/master/preview/preview.gif)
 
