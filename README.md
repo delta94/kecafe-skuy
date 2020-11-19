@@ -1,5 +1,5 @@
 <h1 align="center">KeCafe Skuy </h1> 
-<p align="center"><img src="https://github.com/tavvfiq/kecafe-skuy/blob/master/android/app/src/main/res/mipmap-mdpi/ic_launcher_round.png"></p>
+<p align="center"><img src="https://github.com/tavvfiq/kecafe-skuy/blob/master/android/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" width="100px" height="100px"></p>
 <p align="center" ><img src="https://img.shields.io/badge/Build%20with-React%20Native-61dbfb?style=popout&logo=react"> </p>
 
 An application used to order the food and drink from your phone with reasonable price in "Gofood" style. built with React Native, Redux, and javascript.
