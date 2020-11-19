@@ -2,50 +2,45 @@
 <p align="center"><img src="https://github.com/tavvfiq/kecafe-skuy/blob/master/android/app/src/main/res/mipmap-mdpi/ic_launcher_round.png" width="100px" height="100px"></p>
 <p align="center" ><img src="https://img.shields.io/badge/Build%20with-React%20Native-61dbfb?style=popout&logo=react"> </p>
 
-An application used to order the food and drink from your phone with reasonable price in "Gofood" style. built with React Native, Redux, and javascript.
-## Project Status
+## Contents
 
+- [Description](#description)
+- [Features](#features)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Preview](#preview)
+- [Release APK](#release-apk)
+- [Related Project](#related-project)
+
+## Description
+An application used to order the food and drink from your phone with reasonable price in "Gofood" style. built with React Native, Redux, and javascript.<br>
 This project is currently in test. Users can explore the menu, order the menu, and then checkout. (but not actually checkout. because not yet affiliated with any restaurant).
 
-## Project Preview
+## Features
+- Explore the menu
+- Select the menu
+- Add menu to cart
+- Dummy checkout
+
+## Requirements
+* [`npm`](https://www.npmjs.com/get-npm)
+* [`react-native`](https://facebook.github.io/react-native/docs/getting-started)
+* [`react-native-cli`](https://facebook.github.io/react-native/docs/getting-started)
+* [`Backend KeCafe Skuy`](https://github.com/tavvfiq/cafe-backend)
+
+## Installation
+1. Open your terminal or command prompt
+2. Type `git clone git@github.com:tavvfiq/kecafe-skuy.git`
+3. Open the folder and type `npm install` for install dependencies and `react-native link`
+4. Before run this, you must run backend first
+5. Type `react-native run-android` for run this app. ***Make sure your device is connected with debugging mode***.
+
+## Preview
 
 ![gif preview](https://github.com/tavvfiq/kecafe-skuy/blob/master/preview/preview.gif)
 
-## Installation and Setup Instructions
+## Release APK
+<p>apk is not yet released</p>
 
-Clone down this repository. You will need `node` and `npm` installed globally on your machine.  
-
-Installation:
-
-`npm install`  
-
-To Run Test Suite:  
-
-`npm test`  
-
-To Start Server:
-
-`npm start`  
-
-To Visit App:
-
-`localhost:3000/ideas`  
-
-## Reflection
-
-  - What was the context for this project? (ie: was this a side project? was this for Turing? was this for an experiment?)
-  - What did you set out to build?
-  - Why was this project challenging and therefore a really good learning experience?
-  - What were some unexpected obstacles?
-  - What tools did you use to implement this project?
-      - This might seem obvious because you are IN this codebase, but to all other humans now is the time to talk about why you chose webpack instead of create react app, or D3, or vanilla JS instead of a framework etc. Brag about your choices and justify them here.  
-
-#### Example:  
-
-This was a 3 week long project built during my third module at Turing School of Software and Design. Project goals included using technologies learned up until this point and familiarizing myself with documentation for new features.  
-
-Originally I wanted to build an application that allowed users to pull data from the Twitter API based on what they were interested in, such as 'most tagged users'. I started this process by using the `create-react-app` boilerplate, then adding `react-router-4.0` and `redux`.  
-
-One of the main challenges I ran into was Authentication. This lead me to spend a few days on a research spike into OAuth, Auth0, and two-factor authentication using Firebase or other third parties. Due to project time constraints, I had to table authentication and focus more on data visualization from parts of the API that weren't restricted to authenticated users.
-
-At the end of the day, the technologies implemented in this project are React, React-Router 4.0, Redux, LoDash, D3, and a significant amount of VanillaJS, JSX, and CSS. I chose to use the `create-react-app` boilerplate to minimize initial setup and invest more time in diving into weird technological rabbit holes. In the next iteration I plan on handrolling a `webpack.config.js` file to more fully understand the build process.
+## Related Project
+<a href="https://github.com/tavvfiq/cafe-backend"><img src="https://img.shields.io/badge/Github-KeCafeSkuy%20Backend-61dbfb?style=popout&logo=github"></a>
